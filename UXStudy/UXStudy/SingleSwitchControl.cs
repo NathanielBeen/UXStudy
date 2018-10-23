@@ -11,6 +11,7 @@ namespace UXStudy
         private bool correct_answer;
 
         public int ControlID { get; }
+        public ControlType ControlType { get { return ControlType.SWITCH; } }
         public string Title { get; }
         public bool MustAnswer { get; }
 

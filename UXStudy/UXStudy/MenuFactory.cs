@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UXStudy
 {
-    class MenuFactory
+    public class MenuFactory
     {
 
     }

@@ -6,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace UXStudy
 {
-    //the type of menu currently being tested
-    public enum MenuType
-    {
-        ICON = 0,
-        TAB = 1,
-        ALPHA = 2,
-        GROUPED = 3
-    }
-
     //this is the model class that will represent each menu
     public class Menu
     {

@@ -9,6 +9,7 @@ namespace UXStudy
     //the view models for custom controls will inherit from this
     public interface IGameControl
     {
+        ControlType ControlType { get; }
         int ControlID { get; }
         string Title { get; }
         //whether the user must set this control to pass
@@ -19,12 +20,6 @@ namespace UXStudy
 
         //when a user has selected an option or exited the control
         event EventHandler<ClickEvent> ControlChanged;
-    }
-
-    //add to this whenever a new control type is added
-    public enum ControlType
-    {
-        BUTTON = 0
     }
 
     //allows the id of a control and whether a change was correct to be passed as needed
