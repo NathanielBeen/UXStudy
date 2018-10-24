@@ -26,11 +26,15 @@ namespace UXStudy
 
     public static class ControlTypeExtensions
     {
-        public static MenuAndControlType getMenuTypeFromString(string value)
+        //allow us to represent ControlTypes as strings
+        public static ControlType getMenuTypeFromString(string value)
         {
             switch (value)
             {
-                case "Switch"
+                case "Switch":
+                    return ControlType.SWITCH;
+                default:
+                    return ControlType.NONE;
             }
         }
     }

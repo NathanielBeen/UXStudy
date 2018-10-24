@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ControlParser.cs" />
     <Compile Include="SingleSwitchControl.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuFactory.cs" />
