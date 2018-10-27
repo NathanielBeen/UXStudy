@@ -17,6 +17,28 @@ namespace UXStudy
         RANDOM = 5
     }
 
+    public static class MenuTypeExtensions
+    {
+        public static MenuType getMenuTypeFromString(string value)
+        {
+            switch (value)
+            {
+                case "Icon":
+                    return MenuType.ICON;
+                case "Tab":
+                    return MenuType.TAB;
+                case "Alpha":
+                    return MenuType.ALPHA;
+                case "Grouped":
+                    return MenuType.GROUPED;
+                case "Random":
+                    return MenuType.RANDOM;
+                default:
+                    return MenuType.NONE;
+            }
+        }
+    }
+
     //the type of control being created
     public enum ControlType
     {

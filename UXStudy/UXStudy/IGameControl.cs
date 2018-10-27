@@ -9,11 +9,11 @@ namespace UXStudy
     //the view models for custom controls will inherit from this
     public interface IGameControl
     {
-        ControlType ControlType { get; }
         int ControlID { get; }
+        ControlType ControlType { get; }
         string Title { get; }
         //whether the user must set this control to pass
-        bool MustAnswer { get; }
+        bool Correct { get; }
 
         //when a user has clicked on a textbox or combobox, ect.
         event EventHandler<ClickEvent> ControlChangeStarted;
@@ -25,15 +25,13 @@ namespace UXStudy
     //allows the id of a control and whether a change was correct to be passed as needed
     public class ClickEvent : EventArgs
     {
-        public int Id { get; }
+        public IGameControl Control { get; }
         public DateTime Time { get; }
-        public bool Correct { get; }
 
-        public ClickEvent(int id, DateTime time, bool correct)
+        public ClickEvent(IGameControl control, DateTime time)
         {
-            Id = id;
+            Control = control;
             Time = time;
-            Correct = correct;
         }
     }
 }

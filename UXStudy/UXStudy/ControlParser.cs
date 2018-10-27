@@ -9,34 +9,59 @@ namespace UXStudy
     //creates a control from a line in a config/text file
     public abstract class ControlParser
     {
-        protected int id;
-        protected ControlType type;
-        protected string title;
-        protected bool must_answer;
+        public const int TYPE = 0;
+        public const int TITLE = 1;
+        public const int GROUPING = 2;
+        public const int MUST_ANSWER = 3;
+        public const int EXTRA = 4;
 
-        public ControlParser(int id, string extra)
+        protected int id;
+        protected string title;
+        
+        public string Grouping { get; private set; }
+        public List<int> MustAnswer { get; private set; }
+
+        public ControlParser(int id, string line)
         {
             this.id = id;
-            processExtra(extra);
+            processLine(line);
         }
 
         //creates the base attributes for any control
-        //format: type|title|must_answer|extra <- the contents of "extra" will change based on what type of control it is
-        private void processExtra(string extra)
+        //format: type|title|grouping|must_answer|extra <- the contents of "extra" will change based on what type of control it is
+        private void processLine(string line)
         {
-            string[] parts = extra.Split('|');
-            if (parts.Length != 4 || ControlTypeExtensions.getMenuTypeFromString(parts[0]) == ControlType.NONE ||
-                !Boolean.TryParse(parts[2], out bool must))
+            string[] parts = line.Split('|');
+            if (parts.Length != 5 || ControlTypeExtensions.getMenuTypeFromString(parts[TYPE]) == ControlType.NONE)
             {
-                throw new ArgumentException("must be formatted as type|title|must_answer|extras, where type is a valid controltype and must_answer" +
+                throw new ArgumentException("must be formatted as type|title|grouping|must_answer|extras, where type is a valid controltype and must_answer" +
                     "is a boolean");
             }
             else
             {
-                type = ControlTypeExtensions.getMenuTypeFromString(parts[0]);
-                title = parts[1];
-                must_answer = must;
+                title = parts[TITLE];
+                Grouping = parts[GROUPING];
+                MustAnswer = generateMustAnswer(parts[MUST_ANSWER]);
             }
+        }
+
+        //generate a list of integers that refer to when the user has to answer the control to pass
+        //ex (0,3) means that the control must be answered in the first round and the fourth
+        private List<int> generateMustAnswer(string must_answer)
+        {
+            List<int> ma_list = new List<int>();
+            //if must answer is "none" then it is never used in any round
+            if (must_answer == "none") { return ma_list; }
+
+            string[] parts = must_answer.Split(',');
+            foreach (string part in parts)
+            {
+                //if each part can be parsed as an int, add it too the overall list
+                if (int.TryParse(part, out int conv)) { ma_list.Add(conv); }
+                else { throw new ArgumentException("all grouping values must be integers (or set to none if not used)"); }
+            }
+
+            return ma_list;
         }
 
         //will create the needed view so we can easily add it to a list
@@ -61,6 +86,7 @@ namespace UXStudy
         {
             string extra = line.Split('|')[3];
             string[] parts = extra.Split(',');
+            //if either value is not present or either cannot be converted to a boolean throw an exception
             if (parts.Length != 2 || !Boolean.TryParse(parts[0], out bool first) || !Boolean.TryParse(parts[1], out bool second))
             {
                 throw new ArgumentException(id + ": extras must be formatted true,true or false,true ect.");
@@ -74,7 +100,7 @@ namespace UXStudy
 
         public override IGameControl createControl()
         {
-            return new SingleSwitchControl(id, title, must_answer, correct, init);
+            return new SingleSwitchControl(id, title, correct, init);
         }
     }
 }

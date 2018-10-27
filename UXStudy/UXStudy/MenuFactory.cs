@@ -8,6 +8,16 @@ namespace UXStudy
 {
     public class MenuFactory
     {
+        private MenuParser parser;
 
+        public MenuFactory(MenuParser parse)
+        {
+            parser = parse;
+        }
+
+        public Menu createRandomMenu()
+        {
+            return null;
+        }
     }
 }

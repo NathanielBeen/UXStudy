@@ -13,7 +13,8 @@ namespace UXStudy
         public int ControlID { get; }
         public ControlType ControlType { get { return ControlType.SWITCH; } }
         public string Title { get; }
-        public bool MustAnswer { get; }
+
+        public bool Correct { get { return correct_answer == switched; } }
 
         private bool switched;
         public bool Switched
@@ -22,18 +23,18 @@ namespace UXStudy
             set { switchChanged(value); }
         }
 
-        public SingleSwitchControl(int id, string title, bool must_answer, bool correct, bool init)
+        public SingleSwitchControl(int id, string title, bool correct_ans, bool init)
         {
-            correct_answer = correct;
+            correct_answer = correct_ans;
 
             ControlID = id;
             Title = title;
-            MustAnswer = must_answer;
+            
 
             Switched = init;
         }
 
-        public event EventHandler<int> ControlChangeStarted;
+        public event EventHandler<ClickEvent> ControlChangeStarted;
         public event EventHandler<ClickEvent> ControlChanged;
 
         private void switchChanged(bool value)
@@ -41,7 +42,7 @@ namespace UXStudy
             bool set = SetProperty(ref switched, value);
             if (set)
             {
-                ControlChanged?.Invoke(this, new ClickEvent(ControlID, (correct_answer == switched)));
+                ControlChanged?.Invoke(this, new ClickEvent(this, DateTime.Now));
             }
         }
     }
