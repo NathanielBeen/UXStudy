@@ -20,6 +20,12 @@ namespace UXStudy
             position_file_path = position_path;
         }
 
+        //specifies which user took the test
+        public void logUserInfo(string name)
+        {
+
+        }
+
         //specifies which controls were created
         public void logMenuInfo(MenuType type, List<IGameControl> controls)
         {
