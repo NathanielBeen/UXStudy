@@ -23,6 +23,8 @@ namespace UXStudy
         public const string POSITION_OUTPUT = "";
 
         private ResultLogger logger;
+        private CompletionTracker completion;
+        private MenuFactory factory;
 
         private StudyState current_state;
         public StudyState CurrentState
@@ -59,6 +61,10 @@ namespace UXStudy
 
         public MainApplication()
         {
+            logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
+            completion = new CompletionTracker();
+            factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
+
             CurrentState = StudyState.INITIAL;
             Name = String.Empty;
             Error = String.Empty;
@@ -82,17 +88,80 @@ namespace UXStudy
             {
                 Error = String.Empty;
                 CurrentState = StudyState.READY;
+                logger.logUserInfo(Name);
             }
         }
 
         private void handleStartPhase()
         {
+                CurrentType = completion.getNextType();
+                CurrentMenu = factory.getNextMenu(CurrentType);
+                CurrentMenu.MenuFinished += handleMenuFinished;
 
+                CurrentState = StudyState.TEST;
         }
 
         private void handleEndPhase()
         {
+            completion.typeCompleted(CurrentType);
+            if (completion.testComplete()) { CurrentState = StudyState.COMPLETE; }
+            else { CurrentState = StudyState.READY; }
+        }
 
+        private void handleMenuFinished(object sender, EventArgs args) { handleEndPhase(); }
+    }
+
+    public class CompletionTracker
+    {
+        private Random random;
+        private bool random_complete;
+        private bool alpha_complete;
+        private bool grouped_complete;
+        private bool tabbed_complete;
+
+        public CompletionTracker()
+        {
+            random = new Random();
+            random_complete = false;
+            alpha_complete = false;
+            grouped_complete = false;
+            tabbed_complete = false;
+        }
+
+        public void typeCompleted(MenuType type)
+        {
+            switch (type)
+            {
+                case MenuType.RANDOM:
+                    random_complete = true;
+                    break;
+                case MenuType.ALPHA:
+                    alpha_complete = true;
+                    break;
+                case MenuType.GROUPED:
+                    grouped_complete = true;
+                    break;
+                case MenuType.TAB:
+                    tabbed_complete = true;
+                    break;
+            }
+        }
+
+        public MenuType getNextType()
+        {
+            List<MenuType> incomplete = new List<MenuType>();
+            if (!random_complete) { incomplete.Add(MenuType.RANDOM); }
+            if (!alpha_complete) { incomplete.Add(MenuType.ALPHA); }
+            if (!grouped_complete) { incomplete.Add(MenuType.GROUPED); }
+            if (!tabbed_complete) { incomplete.Add(MenuType.TAB); }
+
+            if (incomplete.Count == 0) { return MenuType.NONE; }
+            return incomplete[random.Next(incomplete.Count)];
+        }
+
+        public bool testComplete()
+        {
+            return (random_complete && alpha_complete && grouped_complete && tabbed_complete);
         }
     }
 }

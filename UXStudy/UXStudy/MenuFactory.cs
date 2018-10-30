@@ -17,7 +17,24 @@ namespace UXStudy
             logger = log;
         }
 
-        public Menu createRandomMenu()
+        public Menu getNextMenu(MenuType type)
+        {
+            switch (type)
+            {
+                case MenuType.RANDOM:
+                    return createRandomMenu();
+                case MenuType.ALPHA:
+                    return createAlphaMenu();
+                case MenuType.GROUPED:
+                    return createGroupedMenu();
+                case MenuType.TAB:
+                    return createTabbedMenu();
+                default:
+                    return null;
+            }
+        }
+
+        private Menu createRandomMenu()
         {
             List<IGameControl> randomized_controls = parser.getAllControls();
             Random random = new Random();
@@ -38,7 +55,7 @@ namespace UXStudy
             return new Menu(MenuType.RANDOM, new List<SubMenu>() { sub }, wanted, logger);
         }
 
-        public Menu createAlphaMenu()
+        private Menu createAlphaMenu()
         {
             List<IGameControl> alpha_controls = parser.getAllControls().OrderBy(c => c.Title).ToList();
             SubMenu sub = new SubMenu(logger, String.Empty, alpha_controls);
@@ -47,7 +64,7 @@ namespace UXStudy
             return new Menu(MenuType.ALPHA, new List<SubMenu>() { sub }, wanted, logger);
         }
 
-        public Menu createGroupedMenu()
+        private Menu createGroupedMenu()
         {
             List<SubMenu> menus = new List<SubMenu>();
             var groups = parser.getGroupedControls();
@@ -61,9 +78,9 @@ namespace UXStudy
             return new Menu(MenuType.GROUPED, menus, wanted, logger);
         }
 
-        public Menu createTabbedMenu()
+        private Menu createTabbedMenu()
         {
-            List<TabbedSubMenu> menus = new List<TabbedSubMenu>();
+            List<SubMenu> menus = new List<SubMenu>();
             var groups = parser.getGroupedControls();
 
             int id = 0;

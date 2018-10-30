@@ -56,6 +56,9 @@
     </ApplicationDefinition>
     <Compile Include="ControlParser.cs" />
     <Compile Include="ControlParserFactory.cs" />
+    <Compile Include="InitialControl.xaml.cs">
+      <DependentUpon>InitialControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainApplication.cs" />
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -79,6 +82,10 @@
     <Compile Include="TabbedMenuControl.xaml.cs">
       <DependentUpon>TabbedMenuControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="InitialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

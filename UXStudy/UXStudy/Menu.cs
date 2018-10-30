@@ -66,7 +66,7 @@ namespace UXStudy
             return true;
         }
 
-        event EventHandler MenuFinished;
+        public event EventHandler MenuFinished;
     }
 
     //this menu has a set of tabs that the user can click between

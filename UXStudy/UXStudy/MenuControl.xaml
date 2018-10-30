@@ -6,7 +6,25 @@
              xmlns:local="clr-namespace:UXStudy"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-                
-    </Grid>
+    <UserControl.Resources>
+        <DataTemplate x:Key="Tabbed">
+            <local:TabbedMenuControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="Single">
+            <ListBox ItemsSource="{Binding Menus}">
+                <DataTemplate>
+                    <local:SubMenuPanel/>
+                </DataTemplate>
+            </ListBox>
+        </DataTemplate>
+        <Style x:Key="MenuStyle" TargetType="ContentControl">
+            <Setter Property="ContentTemplate" Value="{StaticResource Single}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="{x:Static local:MenuType.TAB}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Tabbed}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <ContentControl Style="{StaticResource MenuStyle}" Content="{Binding}"/>
 </UserControl>

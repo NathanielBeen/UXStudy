@@ -10,11 +10,11 @@ namespace UXStudy
     public enum MenuType
     {
         NONE = 0,
-        ICON = 1,
-        TAB = 2,
-        ALPHA = 3,
-        GROUPED = 4,
-        RANDOM = 5
+        TAB = 1,
+        ALPHA = 2,
+        GROUPED = 3,
+        RANDOM = 4,
+        ICON = 5
     }
 
     public static class MenuTypeExtensions
