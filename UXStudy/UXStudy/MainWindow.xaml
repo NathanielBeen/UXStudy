@@ -7,9 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        
+        <DataTemplate x:Key="initial">
+            <local:InitialControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="ready">
+            <local:ReadyControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="menu">
+            <local:MenuControl DataContext="{Binding Menu}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="end">
+            <local:EndControl/>
+        </DataTemplate>
+        <Style x:Key="mainStyle" TargetType="ContentControl">
+            <Setter Property="ContentTemplate" Value="{StaticResource initial}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.READY}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource ready}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.TEST}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource menu}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.COMPLETE}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource end}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
-    <Grid>
-        
-    </Grid>
+    <ContentControl Style="{StaticResource mainStyle}" Content="{Binding}"/>
 </Window>

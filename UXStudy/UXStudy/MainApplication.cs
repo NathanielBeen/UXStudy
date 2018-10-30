@@ -7,6 +7,11 @@ using System.Windows.Input;
 
 namespace UXStudy
 {
+    //determines where in the study the application currently is
+    //Initial: enter user's name
+    //ready: show button prompting start of phase
+    //test: shows the actual menu
+    //complete: show end screen
     public enum StudyState
     {
         INITIAL,
@@ -17,6 +22,7 @@ namespace UXStudy
 
     public class MainApplication : BaseViewModel
     {
+        //location of files to write to/read from
         public const string INPUT_FILE = "";
         public const string INFO_OUTPUT = "";
         public const string ANSWER_OUTPUT = "";
@@ -33,6 +39,7 @@ namespace UXStudy
             set { SetProperty(ref current_state, value); }
         }
 
+        //name of the current user
         private string name;
         public string Name
         {
@@ -45,6 +52,7 @@ namespace UXStudy
             }
         }
 
+        //if the name was not entered, this will display an error
         private string error;
         public string Error
         {
@@ -55,12 +63,13 @@ namespace UXStudy
         public Menu CurrentMenu { get; private set; }
         public MenuType CurrentType { get; private set; }
 
+        //Buttons on the main screen will bind to these commands
         public ICommand SubmitInfoCommand { get; private set; }
         public ICommand StartPhase { get; private set; }
 
         public MainApplication()
         {
-            logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
+            logger = new ResultLogger(ANSWER_OUTPUT, POSITION_OUTPUT);
             completion = new CompletionTracker();
             factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
 
@@ -73,14 +82,19 @@ namespace UXStudy
             initCommands();
         }
 
+        //links the commands to methods tha will fire when they are called
+        //(when a user presses the button assigned to a command, it will
+        //directly call whatevewr method is passed into it)
         private void initCommands()
         {
             SubmitInfoCommand = new RelayCommand(handleSubmitInfo);
             StartPhase = new RelayCommand(handleStartPhase);
         }
 
+        //called when the user enters their name and presses the confirm button
         private void handleSubmitInfo()
         {
+            //check if there is no entered name
             if (Name == String.Empty) { Error = "must enter a valid name"; }
             else
             {
@@ -90,25 +104,34 @@ namespace UXStudy
             }
         }
 
+        //called when the user presses the "start test" button
         private void handleStartPhase()
         {
-                CurrentType = completion.getNextType();
-                CurrentMenu = factory.getNextMenu(CurrentType);
-                CurrentMenu.MenuFinished += handleMenuFinished;
+            //generates the next menu
+            CurrentType = completion.getNextType();
+            CurrentMenu = factory.getNextMenu(CurrentType);
+            CurrentMenu.MenuFinished += handleMenuFinished;
 
-                CurrentState = StudyState.TEST;
+            CurrentState = StudyState.TEST;
         }
 
+        //called when the MenuFinished event of the CurrentMenu is triggered
         private void handleEndPhase()
         {
+            //mark the current type as having been completed, then check if all stages have been complete
             completion.typeCompleted(CurrentType);
-            if (completion.testComplete()) { CurrentState = StudyState.COMPLETE; }
+            if (completion.testComplete())
+            {
+                CurrentState = StudyState.COMPLETE;
+                logger.testComplete();
+            }
             else { CurrentState = StudyState.READY; }
         }
 
         private void handleMenuFinished(object sender, EventArgs args) { handleEndPhase(); }
     }
 
+    //keeps track of which menu types have been completed and which still need to be done
     public class CompletionTracker
     {
         private Random random;
@@ -126,6 +149,7 @@ namespace UXStudy
             tabbed_complete = false;
         }
 
+        //marks a specific type as having been compelted
         public void typeCompleted(MenuType type)
         {
             switch (type)
@@ -145,18 +169,22 @@ namespace UXStudy
             }
         }
 
+        //randomly generates the next menutype to complete
         public MenuType getNextType()
         {
+            //add all the incomplete types to a list
             List<MenuType> incomplete = new List<MenuType>();
             if (!random_complete) { incomplete.Add(MenuType.RANDOM); }
             if (!alpha_complete) { incomplete.Add(MenuType.ALPHA); }
             if (!grouped_complete) { incomplete.Add(MenuType.GROUPED); }
             if (!tabbed_complete) { incomplete.Add(MenuType.TAB); }
 
+            //return a random member of the created list
             if (incomplete.Count == 0) { return MenuType.NONE; }
             return incomplete[random.Next(incomplete.Count)];
         }
 
+        //check if all phases are complete
         public bool testComplete()
         {
             return (random_complete && alpha_complete && grouped_complete && tabbed_complete);

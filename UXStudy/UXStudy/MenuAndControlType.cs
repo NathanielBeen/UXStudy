@@ -19,6 +19,7 @@ namespace UXStudy
 
     public static class MenuTypeExtensions
     {
+        //converts a string to a menu type
         public static MenuType getMenuTypeFromString(string value)
         {
             switch (value)
@@ -35,6 +36,24 @@ namespace UXStudy
                     return MenuType.RANDOM;
                 default:
                     return MenuType.NONE;
+            }
+        }
+
+        //coverts a menu type to a string
+        public static string getTypeString(this MenuType type)
+        {
+            switch (type)
+            {
+                case MenuType.ALPHA:
+                    return "Alphabetical";
+                case MenuType.GROUPED:
+                    return "Grouped";
+                case MenuType.RANDOM:
+                    return "Random";
+                case MenuType.TAB:
+                    return "Tabbed";
+                default:
+                    return "None";
             }
         }
     }
