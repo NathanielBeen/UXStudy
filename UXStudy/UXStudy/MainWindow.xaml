@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:UXStudy"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         
     </Grid>

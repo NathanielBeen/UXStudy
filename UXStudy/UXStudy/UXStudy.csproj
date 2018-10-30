@@ -66,6 +66,9 @@
     <Compile Include="MenuEntryControl.xaml.cs">
       <DependentUpon>MenuEntryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReadyControl.xaml.cs">
+      <DependentUpon>ReadyControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SingleSwitch.xaml.cs">
       <DependentUpon>SingleSwitch.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReadyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

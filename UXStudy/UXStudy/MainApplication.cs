@@ -57,7 +57,6 @@ namespace UXStudy
 
         public ICommand SubmitInfoCommand { get; private set; }
         public ICommand StartPhase { get; private set; }
-        public ICommand EndPhase { get; private set; }
 
         public MainApplication()
         {
@@ -78,7 +77,6 @@ namespace UXStudy
         {
             SubmitInfoCommand = new RelayCommand(handleSubmitInfo);
             StartPhase = new RelayCommand(handleStartPhase);
-            EndPhase = new RelayCommand(handleEndPhase);
         }
 
         private void handleSubmitInfo()
