@@ -14,7 +14,7 @@
             <local:ReadyControl/>
         </DataTemplate>
         <DataTemplate x:Key="menu">
-            <local:MenuControl DataContext="{Binding Menu}"/>
+            <local:MenuControl DataContext="{Binding CurrentMenu}"/>
         </DataTemplate>
         <DataTemplate x:Key="end">
             <local:EndControl/>

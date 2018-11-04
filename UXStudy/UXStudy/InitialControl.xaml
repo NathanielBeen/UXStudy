@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Content="Enter your name:"/>
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding BindingGroupName, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
         <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Confirm Name" Command="{Binding SubmitInfoCommand}" Margin="2" Padding="2" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

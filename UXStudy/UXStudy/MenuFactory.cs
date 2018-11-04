@@ -19,6 +19,7 @@ namespace UXStudy
 
         public Menu getNextMenu(MenuType type)
         {
+            parser.resetAllControls();
             switch (type)
             {
                 case MenuType.RANDOM:
@@ -83,11 +84,9 @@ namespace UXStudy
             List<SubMenu> menus = new List<SubMenu>();
             var groups = parser.getGroupedControls();
 
-            int id = 0;
             foreach (var entry in groups)
             {
-                menus.Add(new TabbedSubMenu(logger, entry.Key, entry.Value, id));
-                id++;
+                menus.Add(new SubMenu(logger, entry.Key, entry.Value));
             }
 
             List<IGameControl> wanted = parser.getWantedControls((int)MenuType.TAB);

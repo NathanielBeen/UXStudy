@@ -69,7 +69,7 @@ namespace UXStudy
     }
 
     //creates a single switch view.
-    //format: type|title|must_answer|correct,init <- how line looks in txt file
+    //format: Switch|title|grouping|must_answer|correct,init <- how line looks in txt file
     public class SwitchParser : ControlParser
     {
         private bool correct;
@@ -84,7 +84,7 @@ namespace UXStudy
         //turn correct,init into their actual values
         private void processExtra(string line)
         {
-            string extra = line.Split('|')[3];
+            string extra = line.Split('|')[EXTRA];
             string[] parts = extra.Split(',');
             //if either value is not present or either cannot be converted to a boolean throw an exception
             if (parts.Length != 2 || !Boolean.TryParse(parts[0], out bool first) || !Boolean.TryParse(parts[1], out bool second))

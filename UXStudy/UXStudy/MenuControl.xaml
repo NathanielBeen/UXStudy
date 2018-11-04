@@ -11,11 +11,15 @@
             <local:TabbedMenuControl/>
         </DataTemplate>
         <DataTemplate x:Key="Single">
-            <ListBox ItemsSource="{Binding Menus}">
-                <DataTemplate>
-                    <local:SubMenuPanel/>
-                </DataTemplate>
-            </ListBox>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Menus}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:SubMenuPanel/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </DataTemplate>
         <Style x:Key="MenuStyle" TargetType="ContentControl">
             <Setter Property="ContentTemplate" Value="{StaticResource Single}"/>

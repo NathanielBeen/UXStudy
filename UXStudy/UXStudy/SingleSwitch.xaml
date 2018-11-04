@@ -8,6 +8,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Horizontal">
         <Label Grid.Column="0" Content="{Binding Title}" VerticalAlignment="Center"/>
-        <CheckBox Grid.Column="1" IsChecked="{Binding Checked}" VerticalAlignment="Center"/>
+        <CheckBox Grid.Column="1" IsChecked="{Binding Switched}" VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>

@@ -25,6 +25,8 @@ namespace UXStudy
 
             control_groupings = new Dictionary<IGameControl, string>();
             wanted_controls = new Dictionary<int, List<IGameControl>>();
+
+            readInControls(location);
         }
 
         private void readInControls(string input_location)
@@ -58,6 +60,14 @@ namespace UXStudy
             }
 
             current_id += 1;
+        }
+
+        public void resetAllControls()
+        {
+            foreach (var control in control_groupings.Keys)
+            {
+                control.reset();
+            }
         }
 
         public List<IGameControl> getAllControls()

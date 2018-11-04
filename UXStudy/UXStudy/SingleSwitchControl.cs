@@ -9,6 +9,7 @@ namespace UXStudy
     class SingleSwitchControl : BaseViewModel, IGameControl
     {
         private bool correct_answer;
+        private bool init;
 
         public int ControlID { get; }
         public ControlType ControlType { get { return ControlType.SWITCH; } }
@@ -26,11 +27,15 @@ namespace UXStudy
         public SingleSwitchControl(int id, string title, bool correct_ans, bool init)
         {
             correct_answer = correct_ans;
+            this.init = init;
 
             ControlID = id;
             Title = title;
-            
+            Switched = init;
+        }
 
+        public void reset()
+        {
             Switched = init;
         }
 

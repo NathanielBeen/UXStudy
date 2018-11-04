@@ -15,6 +15,9 @@ namespace UXStudy
         //whether the user must set this control to pass
         bool Correct { get; }
 
+        //used in between menus
+        void reset();
+
         //when a user has clicked on a textbox or combobox, ect.
         event EventHandler<ClickEvent> ControlChangeStarted;
 

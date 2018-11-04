@@ -23,10 +23,10 @@ namespace UXStudy
     public class MainApplication : BaseViewModel
     {
         //location of files to write to/read from
-        public const string INPUT_FILE = "";
-        public const string INFO_OUTPUT = "";
-        public const string ANSWER_OUTPUT = "";
-        public const string POSITION_OUTPUT = "";
+        public const string INPUT_FILE = "../../Files/input.txt";
+        public const string INFO_OUTPUT = "../../Files/info_out.txt";
+        public const string ANSWER_OUTPUT = "../../Files/answer_out.txt";
+        public const string POSITION_OUTPUT = "../../Files/position_out.txt";
 
         private ResultLogger logger;
         private CompletionTracker completion;
@@ -69,7 +69,7 @@ namespace UXStudy
 
         public MainApplication()
         {
-            logger = new ResultLogger(ANSWER_OUTPUT, POSITION_OUTPUT);
+            logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
             completion = new CompletionTracker();
             factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
 
@@ -113,6 +113,7 @@ namespace UXStudy
             CurrentMenu.MenuFinished += handleMenuFinished;
 
             CurrentState = StudyState.TEST;
+            CurrentMenu.startMenu();
         }
 
         //called when the MenuFinished event of the CurrentMenu is triggered
@@ -123,7 +124,6 @@ namespace UXStudy
             if (completion.testComplete())
             {
                 CurrentState = StudyState.COMPLETE;
-                logger.testComplete();
             }
             else { CurrentState = StudyState.READY; }
         }

@@ -15,9 +15,9 @@ namespace UXStudy
         private string answer_file_path;
         private string position_file_path;
 
-        private StreamWriter info_writer;
-        private StreamWriter answer_writer;
-        private StreamWriter position_writer;
+        private StringBuilder info_string;
+        private StringBuilder answer_string;
+        private StringBuilder position_string;
 
         public ResultLogger(string info_path, string answer_path, string position_path)
         {
@@ -25,57 +25,68 @@ namespace UXStudy
             answer_file_path = answer_path;
             position_file_path = position_path;
 
-            info_writer = new StreamWriter(info_file_path);
-            answer_writer = new StreamWriter(answer_file_path);
-            position_writer = new StreamWriter(position_file_path);
+            info_string = new StringBuilder();
+            answer_string = new StringBuilder();
+            position_string = new StringBuilder();
         }
 
         //specifies which user took the test
         public void logUserInfo(string name)
         {
-            info_writer.WriteLine("User name: " + name);
+            answer_string.AppendLine("User name: " + name);
         }
 
         //specifies which controls were created
         public void logMenuInfo(MenuType type, List<IGameControl> controls)
         {
-            info_writer.WriteLine("Controls for the Menu Type: " + type.getTypeString());
+            info_string.AppendLine("Controls for the Menu Type: " + type.getTypeString());
         }
 
         //tracks when a control is selected but an answer is not yet selected (such as when a textbox is focused)
         public void logControlSelected(int id, DateTime time)
         {
-            answer_writer.WriteLine("Selected | " + id + " | " + time.ToShortTimeString());
+            answer_string.AppendLine("Selected | " + id + " | " + time.ToString("HH:mm:ss"));
         }
 
         //tracks when something is clicked/entered/changed on a control
         public void logResult(int id, bool correct, DateTime time)
         {
-            answer_writer.WriteLine("Answered | " + id + " | " + time.ToShortTimeString());
+            answer_string.AppendLine("Answered | " + id + " | " + correct + "|" + time.ToString("HH:mm:ss"));
         }
 
         //when the test begins
         public void logMenuStarted(MenuType type, DateTime time)
         {
-            answer_writer.WriteLine("Started | "+type.getTypeString()+" | "+time.ToShortTimeString());
+            answer_string.AppendLine("Started | "+type.getTypeString()+" | "+time.ToString("HH:mm:ss"));
         }
 
         //when the test ends
         public void logMenuFinished(MenuType type, DateTime time)
         {
-            answer_writer.WriteLine("Ended | " + type.getTypeString() + " | " + time.ToShortTimeString());
+            answer_string.AppendLine("Ended | " + type.getTypeString() + " | " + time.ToString("HH:mm:ss"));
+
+            using (var sw = new StreamWriter(info_file_path, true))
+            {
+                sw.Write(info_string.ToString());
+            }
+            using (var sw = new StreamWriter(answer_file_path, true))
+            {
+                sw.Write(answer_string.ToString());
+            }
+            using (var sw = new StreamWriter(position_file_path, true))
+            {
+                sw.Write(position_string.ToString());
+            }
+
+            info_string.Clear();
+            answer_string.Clear();
+            position_string.Clear();
         }
 
         //when the mouse moves
         public void logMouseMovement(int x, int y, DateTime time)
         {
-            position_writer.WriteLine(x + "|" + y + "|" + time.ToShortTimeString());
-        }
-
-        public void testComplete()
-        {
-            answer_writer.Close();
-            position_writer.Close();
+            position_string.AppendLine(x + "|" + y + "|" + time.ToString("HH:mm:ss"));
         }
     }
 }

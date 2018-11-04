@@ -9,9 +9,11 @@
     <StackPanel Orientation="Vertical">
         <Label Content="{Binding Title}" HorizontalAlignment="Left"/>
         <ListBox ItemsSource="{Binding Controls}">
-            <DataTemplate>
-                <local:MenuEntryControl/>
-            </DataTemplate>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:MenuEntryControl/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </StackPanel>
 </UserControl>

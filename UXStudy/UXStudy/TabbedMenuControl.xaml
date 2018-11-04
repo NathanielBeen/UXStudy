@@ -6,33 +6,28 @@
              xmlns:local="clr-namespace:UXStudy"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel Orientation="Vertical">
-        <ListBox ItemsSource="{Binding Menus}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <DataTemplate>
-                <RadioButton Content="{Binding Title}">
-                    <RadioButton.Style>
-                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                            <Setter Property="IsChecked" Value="False"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},
-                                    Path=DataContext.SelectedId}" Value="{Binding MenuId}">
-                                    <Setter Property="IsChecked" Value="True"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </RadioButton.Style>
-                </RadioButton>
-            </DataTemplate>
-        </ListBox>
-        <ListBox ItemsSource="{Binding Controls}">
-            <DataTemplate>
-                <local:MenuEntryControl/>
-            </DataTemplate>
-        </ListBox>
-    </StackPanel>
+    <UserControl.Resources>
+        <DataTemplate x:Key="SubHeader">
+            <Label Content="{Binding Title}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="tab">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox ItemsSource="{Binding Controls}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:MenuEntryControl/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </DataTemplate>
+    </UserControl.Resources>
+    <TabControl ItemsSource="{Binding Menus}" SelectedIndex="0">
+        <TabControl.ItemContainerStyle>
+            <Style TargetType="TabItem">
+                <Setter Property="Header" Value="{Binding Title}"/>
+                <Setter Property="ContentTemplate" Value="{StaticResource tab}"/>
+            </Style>
+        </TabControl.ItemContainerStyle>
+    </TabControl>
 </UserControl>
