@@ -59,6 +59,8 @@
     <Compile Include="EndControl.xaml.cs">
       <DependentUpon>EndControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameState.cs" />
+    <Compile Include="ImageReader.cs" />
     <Compile Include="InitialControl.xaml.cs">
       <DependentUpon>InitialControl.xaml</DependentUpon>
     </Compile>
@@ -97,6 +99,10 @@
     </Compile>
     <Compile Include="TabbedSubMenuControl.xaml.cs">
       <DependentUpon>TabbedSubMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Toolkit.cs" />
+    <Compile Include="ToolkitControl.xaml.cs">
+      <DependentUpon>ToolkitControl.xaml</DependentUpon>
     </Compile>
     <Page Include="EndControl.xaml">
       <SubType>Designer</SubType>
@@ -153,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TabbedSubMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolkitControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

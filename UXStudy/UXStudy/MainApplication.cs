@@ -27,10 +27,13 @@ namespace UXStudy
         public const string INFO_OUTPUT = "../../Files/info_out.txt";
         public const string ANSWER_OUTPUT = "../../Files/answer_out.txt";
         public const string POSITION_OUTPUT = "../../Files/position_out.txt";
+        public const string TOOL_IMAGES = "";
 
+        private GameState state;
         private ResultLogger logger;
         private CompletionTracker completion;
         private MenuFactory factory;
+        private ImageReader reader;
 
         private StudyState current_state;
         public StudyState CurrentState
@@ -62,7 +65,9 @@ namespace UXStudy
 
         public Menu CurrentMenu { get; private set; }
         public MenuType CurrentType { get; private set; }
+
         public Instructions Instructions { get; private set; }
+        public Toolkit Toolkit { get; private set; }
 
         //Buttons on the main screen will bind to these commands
         public ICommand SubmitInfoCommand { get; private set; }
@@ -71,16 +76,20 @@ namespace UXStudy
 
         public MainApplication()
         {
+            state = new GameState(Tool.NONE);
             logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
             completion = new CompletionTracker();
             factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
+            reader = new ImageReader(TOOL_IMAGES);
 
             CurrentState = StudyState.INITIAL;
             Name = String.Empty;
             Error = String.Empty;
             CurrentMenu = null;
             CurrentType = MenuType.NONE;
+
             Instructions = new Instructions();
+            Toolkit = initToolkit();
 
             initCommands();
         }
@@ -93,6 +102,19 @@ namespace UXStudy
             SubmitInfoCommand = new RelayCommand(handleSubmitInfo);
             StartPhase = new RelayCommand(handleStartPhase);
             ExitProgram = new RelayCommand(handleExitProgram);
+        }
+
+        private Toolkit initToolkit()
+        {
+            List<ToolView> tools = new List<ToolView>();
+            var tool_dict = reader.getToolImages();
+
+            foreach (var entry in tool_dict)
+            {
+                tools.Add(new ToolView(entry.Key, entry.Value));
+            }
+
+            return new Toolkit(state, tools);
         }
 
         //called when the user enters their name and presses the confirm button
