@@ -1,0 +1,15 @@
+﻿<Window x:Class="UXStudy.InstructionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UXStudy"
+        mc:Ignorable="d"
+        Title="InstructionWindow" Height="300" Width="300"
+        Top="200" Left="800"
+        Visibility="{Binding Visibility}">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="{Binding Preamble}"  TextWrapping="WrapWithOverflow"/>
+        <TextBlock Text="{Binding InstructionString}" TextWrapping="WrapWithOverflow"/>
+    </StackPanel>
+</Window>

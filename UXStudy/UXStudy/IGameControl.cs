@@ -12,6 +12,7 @@ namespace UXStudy
         int ControlID { get; }
         ControlType ControlType { get; }
         string Title { get; }
+        string Instructions { get; }
         //whether the user must set this control to pass
         bool Correct { get; }
 

@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace UXStudy
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InstructionWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InstructionWindow : Window
     {
-        private MainApplication app;
-        private Window instruction_window;
-
-        public MainWindow()
+        public InstructionWindow()
         {
             InitializeComponent();
-            app = new MainApplication();
-            instruction_window = new InstructionWindow();
-    
-            instruction_window.DataContext = app.Instructions;
-            DataContext = app;
         }
     }
 }

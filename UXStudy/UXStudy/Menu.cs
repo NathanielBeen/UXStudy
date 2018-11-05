@@ -12,7 +12,7 @@ namespace UXStudy
     {
         private ResultLogger logger;
         //a list of ids and current status of controls that need to be changed to "win"
-        private List<IGameControl> wanted_controls;
+        public List<IGameControl> WantedControls { get; private set; }
 
         public MenuType Type { get; }
         public List<SubMenu> Menus { get; }
@@ -20,7 +20,7 @@ namespace UXStudy
         public Menu(MenuType type, List<SubMenu> menus, List<IGameControl> wanted, ResultLogger log)
         {
             logger = log;
-            wanted_controls = wanted;
+            WantedControls = wanted;
 
             Type = type;
             Menus = menus;
@@ -54,12 +54,13 @@ namespace UXStudy
 
         private void handleControlAnswered(object sender, ClickEvent click)
         {
-            bool correct = (click.Control.Correct && wanted_controls.Contains(click.Control));
+            bool correct = (click.Control.Correct && WantedControls.Contains(click.Control));
             logger.logResult(click.Control.ControlID, correct, click.Time);
+
             //if all controls have been correctly answered, log the finish and update the main game
             //so it can generate the next menu (if the answered control is not in the desired category and the 
             //menu was previoiusly incomplete there is no need to check again)
-            if (wanted_controls.Contains(click.Control) && checkMenuFinished())
+            if (WantedControls.Contains(click.Control) && checkMenuFinished())
             {
                 logger.logMenuFinished(Type, click.Time);
                 unhookMenus();
@@ -70,7 +71,7 @@ namespace UXStudy
         //checks to see if all needed controls have been correctly answered
         private bool checkMenuFinished()
         {
-            foreach (var control in wanted_controls)
+            foreach (var control in WantedControls)
             {
                 if (!control.Correct) { return false; }
             }

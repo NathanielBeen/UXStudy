@@ -14,6 +14,7 @@ namespace UXStudy
         public int ControlID { get; }
         public ControlType ControlType { get { return ControlType.SWITCH; } }
         public string Title { get; }
+        public string Instructions { get; }
 
         public bool Correct { get { return correct_answer == switched; } }
 
@@ -24,13 +25,14 @@ namespace UXStudy
             set { switchChanged(value); }
         }
 
-        public SingleSwitchControl(int id, string title, bool correct_ans, bool init)
+        public SingleSwitchControl(int id, string title, string instructions, bool correct_ans, bool init)
         {
             correct_answer = correct_ans;
             this.init = init;
 
             ControlID = id;
             Title = title;
+            Instructions = instructions;
             Switched = init;
         }
 

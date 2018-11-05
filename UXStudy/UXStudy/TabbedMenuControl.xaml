@@ -11,15 +11,7 @@
             <Label Content="{Binding Title}"/>
         </DataTemplate>
         <DataTemplate x:Key="tab">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ListBox ItemsSource="{Binding Controls}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <local:MenuEntryControl/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
+            <local:TabbedSubMenuControl/>
         </DataTemplate>
     </UserControl.Resources>
     <TabControl ItemsSource="{Binding Menus}" SelectedIndex="0">

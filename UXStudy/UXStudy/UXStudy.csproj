@@ -62,6 +62,10 @@
     <Compile Include="InitialControl.xaml.cs">
       <DependentUpon>InitialControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Instructions.cs" />
+    <Compile Include="InstructionWindow.xaml.cs">
+      <DependentUpon>InstructionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainApplication.cs" />
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -71,6 +75,9 @@
     </Compile>
     <Compile Include="ReadyControl.xaml.cs">
       <DependentUpon>ReadyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SInglePageMenuControl.xaml.cs">
+      <DependentUpon>SInglePageMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SingleSwitch.xaml.cs">
       <DependentUpon>SingleSwitch.xaml</DependentUpon>
@@ -88,11 +95,18 @@
     <Compile Include="TabbedMenuControl.xaml.cs">
       <DependentUpon>TabbedMenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabbedSubMenuControl.xaml.cs">
+      <DependentUpon>TabbedSubMenuControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="EndControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InitialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InstructionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SInglePageMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SingleSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TabbedMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TabbedSubMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

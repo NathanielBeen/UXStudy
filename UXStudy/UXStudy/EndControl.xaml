@@ -15,8 +15,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Content="Thank you for completing the test!"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Exit Test" Command="{Binding ExitProgram}"/>
     </Grid>
 </UserControl>

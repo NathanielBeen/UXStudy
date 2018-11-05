@@ -14,9 +14,11 @@ namespace UXStudy
         public const int GROUPING = 2;
         public const int MUST_ANSWER = 3;
         public const int EXTRA = 4;
+        public const int INSTRUCTIONS = 5;
 
         protected int id;
         protected string title;
+        protected string instructions;
         
         public string Grouping { get; private set; }
         public List<int> MustAnswer { get; private set; }
@@ -28,18 +30,19 @@ namespace UXStudy
         }
 
         //creates the base attributes for any control
-        //format: type|title|grouping|must_answer|extra <- the contents of "extra" will change based on what type of control it is
+        //format: type|title|grouping|must_answer|extra|instructions <- the contents of "extra" will change based on what type of control it is
         private void processLine(string line)
         {
             string[] parts = line.Split('|');
-            if (parts.Length != 5 || ControlTypeExtensions.getMenuTypeFromString(parts[TYPE]) == ControlType.NONE)
+            if (parts.Length != 6 || ControlTypeExtensions.getMenuTypeFromString(parts[TYPE]) == ControlType.NONE)
             {
-                throw new ArgumentException("must be formatted as type|title|grouping|must_answer|extras, where type is a valid controltype and must_answer" +
+                throw new ArgumentException("must be formatted as type|title|grouping|must_answer|extras|instructions, where type is a valid controltype and must_answer" +
                     "is a boolean");
             }
             else
             {
                 title = parts[TITLE];
+                instructions = parts[INSTRUCTIONS];
                 Grouping = parts[GROUPING];
                 MustAnswer = generateMustAnswer(parts[MUST_ANSWER]);
             }
@@ -100,7 +103,7 @@ namespace UXStudy
 
         public override IGameControl createControl()
         {
-            return new SingleSwitchControl(id, title, correct, init);
+            return new SingleSwitchControl(id, title, instructions, correct, init);
         }
     }
 }

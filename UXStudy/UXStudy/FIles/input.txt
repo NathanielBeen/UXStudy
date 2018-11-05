@@ -1,11 +1,11 @@
-Switch|Control 1|Group 1|1|True,False
-Switch|Control 2|Group 1|2|True,False
-Switch|Control 3|Group 2|3|True,False
-Switch|Control 4|Group 2|4|True,False
-Switch|Control 5|Group 2|1|True,False
-Switch|Control 6|Group 2|2|True,False
-Switch|Control 7|Group 3|3|True,False
-Switch|Control 8|Group 3|4|True,False
-Switch|Control 9|Group 4|none|True,False
-Switch|Control 10|Group 4|none|True,False
-Switch|Control 11|Group 4|none|True,False
+Switch|Control 1|Group 1|1|True,False|Instructions for Control 1
+Switch|Control 2|Group 1|2|True,False|Instructions for Control 2
+Switch|Control 3|Group 2|3|True,False|Instructions for Control 3
+Switch|Control 4|Group 2|4|True,False|Instructions for Control 4
+Switch|Control 5|Group 2|1|True,False|Instructions for Control 5
+Switch|Control 6|Group 2|2|True,False|Instructions for Control 6
+Switch|Control 7|Group 3|3|True,False|Instructions for Control 7
+Switch|Control 8|Group 3|4|True,False|Instructions for Control 8
+Switch|Control 9|Group 4|none|True,False|Instructions for Control 9
+Switch|Control 10|Group 4|none|True,False|Instructions for Control 10
+Switch|Control 11|Group 4|none|True,False|Instructions for Control 11

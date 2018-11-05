@@ -62,10 +62,12 @@ namespace UXStudy
 
         public Menu CurrentMenu { get; private set; }
         public MenuType CurrentType { get; private set; }
+        public Instructions Instructions { get; private set; }
 
         //Buttons on the main screen will bind to these commands
         public ICommand SubmitInfoCommand { get; private set; }
         public ICommand StartPhase { get; private set; }
+        public ICommand ExitProgram { get; private set; }
 
         public MainApplication()
         {
@@ -78,6 +80,7 @@ namespace UXStudy
             Error = String.Empty;
             CurrentMenu = null;
             CurrentType = MenuType.NONE;
+            Instructions = new Instructions();
 
             initCommands();
         }
@@ -89,6 +92,7 @@ namespace UXStudy
         {
             SubmitInfoCommand = new RelayCommand(handleSubmitInfo);
             StartPhase = new RelayCommand(handleStartPhase);
+            ExitProgram = new RelayCommand(handleExitProgram);
         }
 
         //called when the user enters their name and presses the confirm button
@@ -112,6 +116,8 @@ namespace UXStudy
             CurrentMenu = factory.getNextMenu(CurrentType);
             CurrentMenu.MenuFinished += handleMenuFinished;
 
+            Instructions.setInstructions(CurrentMenu.WantedControls);
+            Instructions.launchInstructions();
             CurrentState = StudyState.TEST;
             CurrentMenu.startMenu();
         }
@@ -121,11 +127,18 @@ namespace UXStudy
         {
             //mark the current type as having been completed, then check if all stages have been complete
             completion.typeCompleted(CurrentType);
+            Instructions.closeInstructions();
+
             if (completion.testComplete())
             {
                 CurrentState = StudyState.COMPLETE;
             }
             else { CurrentState = StudyState.READY; }
+        }
+
+        private void handleExitProgram()
+        {
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void handleMenuFinished(object sender, EventArgs args) { handleEndPhase(); }
