@@ -28,6 +28,6 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <local:ToolkitControl Grid.Column="0" DataContext="{Binding Toolkit}"/>
-        <ContentControl Grid.Column="1" Style="{StaticResource MenuStyle}" Content="{Binding}"/>
+        <ContentControl Grid.Column="1" DataContext="{Binding CurrentMenu}" Style="{StaticResource MenuStyle}" Content="{Binding}"/>
     </Grid>
 </UserControl>

@@ -27,7 +27,7 @@ namespace UXStudy
         public const string INFO_OUTPUT = "../../Files/info_out.txt";
         public const string ANSWER_OUTPUT = "../../Files/answer_out.txt";
         public const string POSITION_OUTPUT = "../../Files/position_out.txt";
-        public const string TOOL_IMAGES = "";
+        public const string TOOL_IMAGES = "../../Files/";
 
         private GameState state;
         private ResultLogger logger;

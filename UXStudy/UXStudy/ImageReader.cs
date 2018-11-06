@@ -33,17 +33,7 @@ namespace UXStudy
 
         private BitmapImage getImageFromLocation(string loc)
         {
-            BitmapImage bitmap;
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(loc))
-            {
-                bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                bitmap.Freeze();
-            }
-            return bitmap;
+            return new BitmapImage(new Uri(loc, UriKind.Relative));
         }
     }
 }

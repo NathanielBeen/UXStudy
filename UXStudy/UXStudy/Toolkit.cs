@@ -40,13 +40,13 @@ namespace UXStudy
             switch (tool)
             {
                 case Tool.BLUE_WIRE:
-                    return "Blue_Wire.png";
+                    return "BlueWire.png";
                 case Tool.GREEN_WIRE:
-                    return "Green_Wire.png";
+                    return "GreenWire.png";
                 case Tool.RED_WIRE:
-                    return "Red_Wire.png";
+                    return "RedWire.png";
                 case Tool.WIRE_CUTTER:
-                    return "Wire_Cutter.png";
+                    return "WireCutter.png";
                 default:
                     return "None.png";
             }
