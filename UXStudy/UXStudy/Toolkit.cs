@@ -51,6 +51,26 @@ namespace UXStudy
                     return "None.png";
             }
         }
+
+        public static bool isWire(this Tool tool)
+        {
+            return (tool == Tool.BLUE_WIRE || tool == Tool.RED_WIRE || tool == Tool.GREEN_WIRE);
+        }
+
+        public static Color getWireColor(this Tool tool)
+        {
+            switch (tool)
+            {
+                case Tool.BLUE_WIRE:
+                    return Colors.Blue;
+                case Tool.GREEN_WIRE:
+                    return Colors.Green;
+                case Tool.RED_WIRE:
+                    return Colors.Red;
+                default:
+                    return Colors.White;
+            }
+        }
     }
 
     public class Toolkit : BaseViewModel

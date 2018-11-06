@@ -104,6 +104,10 @@
     <Compile Include="ToolkitControl.xaml.cs">
       <DependentUpon>ToolkitControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wire.cs" />
+    <Compile Include="WireControl.xaml.cs">
+      <DependentUpon>WireControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="EndControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolkitControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WireControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
