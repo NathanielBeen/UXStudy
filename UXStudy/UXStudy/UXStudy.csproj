@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConnectionControl.xaml.cs">
+      <DependentUpon>ConnectionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlParser.cs" />
     <Compile Include="ControlParserFactory.cs" />
     <Compile Include="EndControl.xaml.cs">
@@ -91,6 +94,9 @@
     <Compile Include="MenuAndControlType.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ResultLogger.cs" />
+    <Compile Include="SingleWireControl.xaml.cs">
+      <DependentUpon>SingleWireControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubMenuPanel.xaml.cs">
       <DependentUpon>SubMenuPanel.xaml</DependentUpon>
     </Compile>
@@ -105,9 +111,14 @@
       <DependentUpon>ToolkitControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wire.cs" />
+    <Compile Include="WireGroupControl.cs" />
     <Compile Include="WireControl.xaml.cs">
       <DependentUpon>WireControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="ConnectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EndControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SingleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SingleWireControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -62,7 +62,8 @@ namespace UXStudy
     public enum ControlType
     {
         NONE = 0,
-        SWITCH = 1
+        SWITCH = 1,
+        WIRE = 2
     }
 
     public static class ControlTypeExtensions
@@ -74,6 +75,8 @@ namespace UXStudy
             {
                 case "Switch":
                     return ControlType.SWITCH;
+                case "Wire":
+                    return ControlType.WIRE;
                 default:
                     return ControlType.NONE;
             }

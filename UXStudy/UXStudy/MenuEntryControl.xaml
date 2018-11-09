@@ -10,6 +10,9 @@
         <DataTemplate x:Key="SingleSwitch">
             <local:SingleSwitch/>
         </DataTemplate>
+        <DataTemplate x:Key="Wire">
+            <local:WireControl/>
+        </DataTemplate>
         <DataTemplate x:Key="Standard">
             <Label Content=""/>
         </DataTemplate>
@@ -19,6 +22,9 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.SWITCH}">
                     <Setter Property="ContentTemplate" Value="{StaticResource SingleSwitch}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.WIRE}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Wire}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>

@@ -8,4 +8,4 @@ Switch|Control 7|Group 3|3|True,False|Instructions for Control 7
 Switch|Control 8|Group 3|4|True,False|Instructions for Control 8
 Switch|Control 9|Group 4|none|True,False|Instructions for Control 9
 Switch|Control 10|Group 4|none|True,False|Instructions for Control 10
-Switch|Control 11|Group 4|none|True,False|Instructions for Control 11
+Wire|Control 11|Group 4|none|none,none,5|Instructions for Control 11

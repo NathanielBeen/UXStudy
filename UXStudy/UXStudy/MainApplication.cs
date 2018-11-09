@@ -79,7 +79,7 @@ namespace UXStudy
             state = new GameState(Tool.NONE);
             logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
             completion = new CompletionTracker();
-            factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
+            factory = new MenuFactory(new MenuParser(logger, state, INPUT_FILE), logger);
             reader = new ImageReader(TOOL_IMAGES);
 
             CurrentState = StudyState.INITIAL;

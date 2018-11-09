@@ -11,6 +11,9 @@ namespace UXStudy
     public class WireGroup : BaseViewModel
     {
         private GameState state;
+        private List<Wire> correct;
+        private List<Wire> init;
+        private bool complete;
 
         private ObservableCollection<Wire> wires;
         public ObservableCollection<Wire> Wires
@@ -23,12 +26,14 @@ namespace UXStudy
         public List<Connection> BottomConnections { get; private set; }
         public int Size { get; }
 
-        public WireGroup(GameState st, int size, List<WireGuide> wire_list)
+        public WireGroup(GameState st, int size, List<WireGuide> correct_list, List<WireGuide> init_list)
         {
             state = st;
             Size = size;
+
             initConnections();
-            initWires(wire_list);
+            initCorrectWires(correct_list);
+            initStartWires(init_list);
         }
 
         private void initConnections()
@@ -39,8 +44,8 @@ namespace UXStudy
             char label = 'A';
             for (int index = 0; index < Size; index++)
             {
-                Connection top = new Connection(index.ToString());
-                Connection bottom = new Connection(label.ToString());
+                Connection top = new Connection(index.ToString(), true, index);
+                Connection bottom = new Connection(label.ToString(), false, index);
 
                 top.ConnSelected += handleConnectionSelected;
                 top.ConnDeselected += handleConnectionDeselected;
@@ -57,20 +62,59 @@ namespace UXStudy
             BottomConnections = bottom_list;
         }
 
-        private void initWires(List<WireGuide> wire_list)
+        private void initCorrectWires(List<WireGuide> guide)
         {
-            Wires = new ObservableCollection<Wire>();
+            correct = new List<Wire>();
 
-            foreach (var wire_guide in wire_list)
+            foreach (var wire_guide in guide)
             {
                 Connection top = TopConnections[wire_guide.Top];
                 Connection bottom = BottomConnections[wire_guide.Bottom];
+
+                Wire correct_wire = new Wire(top, bottom, wire_guide.Color);
+                correct.Add(correct_wire);
+            }
+        }
+
+        private void initStartWires(List<WireGuide> guide)
+        {
+            Wires = new ObservableCollection<Wire>();
+            init = new List<Wire>();
+
+            foreach (var wire_guide in guide)
+            {
+                Connection top = TopConnections[wire_guide.Top];
+                Connection bottom = BottomConnections[wire_guide.Bottom];
+
+                Wire init_wire = new Wire(top, bottom, wire_guide.Color);
+                init.Add(init_wire);
 
                 Wire wire = new Wire(top, bottom, wire_guide.Color);
                 wire.Clicked += handleWireClicked;
 
                 Wires.Add(wire);
             }
+
+            checkIfGroupComplete();
+        }
+
+        public void resetWires()
+        {
+            foreach (var wire in init)
+            {
+                wire.Clicked -= handleWireClicked;
+            }
+            Wires.Clear();
+
+            foreach (var wire_guide in init)
+            {
+                Wire wire = new Wire(wire_guide.TopConnect, wire_guide.BottomConnect, wire_guide.Color);
+                wire.Clicked += handleWireClicked;
+
+                Wires.Add(wire);
+            }
+
+            checkIfGroupComplete();
         }
 
         private void handleConnectionSelected(object sender, Connection selected)
@@ -90,17 +134,25 @@ namespace UXStudy
 
         private void handleWireClicked(object sender, Wire wire)
         {
-            if (state.ToolState == Tool.WIRE_CUTTER) { Wires.Remove(wire); }
+            if (state.ToolState == Tool.WIRE_CUTTER)
+            {
+                Wires.Remove(wire);
+                checkIfGroupComplete();
+            }
         }
 
         private void checkForWireCreation()
         {
-            Connection top_selected = TopConnections.Where(c => c.Selected = true).FirstOrDefault();
-            Connection bottom_selected = BottomConnections.Where(c => c.Selected = true).FirstOrDefault();
+            Connection top_selected = TopConnections.Where(c => c.Selected == true).FirstOrDefault();
+            Connection bottom_selected = BottomConnections.Where(c => c.Selected == true).FirstOrDefault();
 
             if (top_selected != null && bottom_selected != null)
             {
-                if (state.ToolState.isWire()) { createWire(top_selected, bottom_selected); }
+                if (state.ToolState.isWire())
+                {
+                    createWire(top_selected, bottom_selected);
+                    checkIfGroupComplete();
+                }
                 else { resetConnections(); }
             }
         }
@@ -118,6 +170,32 @@ namespace UXStudy
 
             Wires.Add(new Wire(top, bottom, state.ToolState.getWireColor()));
         }
+
+        private void checkIfGroupComplete()
+        {
+            foreach (Wire wire in correct)
+            {
+                Wire matching = Wires.Where(w => w.TopConnect.Equals(wire.TopConnect) && w.BottomConnect.Equals(wire.BottomConnect)
+                    && colorMatches(w.Color, wire.Color)).FirstOrDefault();
+                
+                if (matching == null)
+                {
+                    if (complete == true) { NotCompleted?.Invoke(this, new EventArgs()); }
+                    complete = false;
+                    return;
+                }
+            }
+
+            Completed?.Invoke(this, new EventArgs());
+        }
+
+        private bool colorMatches(Color first, Color second)
+        {
+            return (first.R == second.R && first.G == second.G && first.B == second.B);
+        }
+
+        public event EventHandler Completed;
+        public event EventHandler NotCompleted;
     }
 
     public class WireGuide
@@ -166,7 +244,11 @@ namespace UXStudy
     
     public class Connection : BaseViewModel
     {
-        public string Title { get; private set; }
+        public string Title { get;}
+        public bool IsTop { get; }
+
+        public int Top { get; private set; }
+        public int Left { get; private set; }
 
         private bool selected;
         public bool Selected
@@ -176,30 +258,40 @@ namespace UXStudy
         }
 
         public RelayCommand SelectCommand { get; private set; }
-        public RelayCommand DeselectCommand { get; private set; }
 
-        public Connection(string title)
+        public Connection(string title, bool top, int index)
         {
+            Title = title;
+            IsTop = top;
+
             Selected = false;
             initCommands();
+            genCoords(top, index);
         }
 
         private void initCommands()
         {
             SelectCommand = new RelayCommand(mouseSelect);
-            DeselectCommand = new RelayCommand(mouseDeselect);
+        }
+
+        private void genCoords(bool top, int index)
+        {
+            Top = (top) ? 0 : 100;
+            Left = index * 15;
         }
 
         private void mouseSelect()
         {
-            Selected = true;
-            ConnSelected?.Invoke(this, this);
-        }
-
-        private void mouseDeselect()
-        {
-            Selected = false;
-            ConnDeselected?.Invoke(this, this);
+            if (Selected)
+            {
+                Selected = false;
+                ConnDeselected?.Invoke(this, this);
+            }
+            else
+            {
+                Selected = true;
+                ConnSelected?.Invoke(this, this);
+            }
         }
 
         public event EventHandler<Connection> ConnSelected;

@@ -10,6 +10,7 @@ namespace UXStudy
     //will create a menu
     public class MenuParser
     {
+        private GameState state;
         private string location;
         private ResultLogger logger;
         private int current_id;
@@ -17,8 +18,9 @@ namespace UXStudy
         private Dictionary<IGameControl, string> control_groupings;
         private Dictionary<int, List<IGameControl>> wanted_controls;
 
-        public MenuParser(ResultLogger log, string input_location)
+        public MenuParser(ResultLogger log, GameState st, string input_location)
         {
+            state = st;
             location = input_location;
             logger = log;
             current_id = 0;
@@ -44,7 +46,7 @@ namespace UXStudy
         private void createControl(string line)
         {
             var parser = ControlParserFactory.createParser(current_id, line);
-            var control = parser.createControl();
+            var control = parser.createControl(state);
 
             control_groupings.Add(control, parser.Grouping);
             foreach (int type in parser.MustAnswer)

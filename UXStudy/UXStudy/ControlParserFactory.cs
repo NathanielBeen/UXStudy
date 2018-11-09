@@ -15,6 +15,8 @@ namespace UXStudy
             {
                 case ControlType.SWITCH:
                     return new SwitchParser(id, line);
+                case ControlType.WIRE:
+                    return new WireParser(id, line);
                 default:
                     return null;
             }

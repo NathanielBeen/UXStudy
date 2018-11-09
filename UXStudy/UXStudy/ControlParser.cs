@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace UXStudy
 {
@@ -68,7 +69,7 @@ namespace UXStudy
         }
 
         //will create the needed view so we can easily add it to a list
-        public abstract IGameControl createControl();
+        public abstract IGameControl createControl(GameState state);
     }
 
     //creates a single switch view.
@@ -101,9 +102,71 @@ namespace UXStudy
             }
         }
 
-        public override IGameControl createControl()
+        public override IGameControl createControl(GameState state)
         {
             return new SingleSwitchControl(id, title, instructions, correct, init);
+        }
+    }
+
+    //format: Wire|title|grouping|must_answer|correct,init,size <- how line looks in txt file
+    //correct and init both formatted as entry.entry.entry
+    //entry formatted as top'bottom'color
+    public class WireParser : ControlParser
+    {
+        private int size;
+        private List<WireGuide> correct;
+        private List<WireGuide> init;
+
+        public WireParser(int id, string line)
+            :base(id, line)
+        {
+            processExtra(line);
+        }
+
+        private void processExtra(string line)
+        {
+            string extra = line.Split('|')[EXTRA];
+            string[] parts = extra.Split(',');
+
+            if (parts.Length != 3 || !int.TryParse(parts[2], out int s))
+            {
+                throw new ArgumentException(id + ": extras must be formatted correct,init,size with size being an integer");
+            }
+            else
+            {
+                size = s;
+                correct = processWires(parts[0]);
+                init = processWires(parts[1]);
+            }
+        }
+
+        private List<WireGuide> processWires(string wires)
+        {
+            List<WireGuide> wire_list = new List<WireGuide>();
+
+            if (wires.Equals("none")) { return wire_list; }
+            string[] ind_wires = wires.Split('.');
+
+            foreach (string wire in ind_wires)
+            {
+                string[] wire_parts = wire.Split('\'');
+                if (wire_parts.Length != 3 || !int.TryParse(wire_parts[0], out int top) || !int.TryParse(wire_parts[1], out int bottom))
+                {
+                    throw new ArgumentException(id + ": each wire must be formatted top'bottom'color, where top and bottom are integers");
+                }
+                else
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString(wire_parts[2]);
+                    wire_list.Add(new WireGuide(top, bottom, color));
+                }
+            }
+            return wire_list;
+        }
+
+        public override IGameControl createControl(GameState state)
+        {
+            WireGroup group = new WireGroup(state, size, correct, init);
+            return new WireGroupControl(group);
         }
     }
 }
