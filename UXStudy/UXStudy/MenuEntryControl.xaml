@@ -10,6 +10,18 @@
         <DataTemplate x:Key="SingleSwitch">
             <local:SingleSwitch/>
         </DataTemplate>
+        <DataTemplate x:Key="Textbox">
+            <local:Textbox/>
+        </DataTemplate>
+        <DataTemplate x:Key="Radio">
+            <local:RadioControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="Combo">
+            <local:ComboBox/>
+        </DataTemplate>
+        <DataTemplate x:Key="Slider">
+            <local:Slider/>
+        </DataTemplate>
         <DataTemplate x:Key="Standard">
             <Label Content=""/>
         </DataTemplate>
@@ -20,8 +32,24 @@
                 <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.SWITCH}">
                     <Setter Property="ContentTemplate" Value="{StaticResource SingleSwitch}"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.TEXTBOX}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Textbox}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.COMBOBOX}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Combo}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.RADIO}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Radio}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlType}" Value="{x:Static local:ControlType.SLIDER}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource Slider}"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <ContentControl Style="{StaticResource TypeStyle}" Content="{Binding }"/>
+    <StackPanel Orientation="Vertical">
+        <Label Height="5"/>
+        <ContentControl Style="{StaticResource TypeStyle}" Content="{Binding }"/>
+        <Label Height="5"/>
+    </StackPanel>
 </UserControl>

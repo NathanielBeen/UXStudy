@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComboBoxControl.cs" />
+    <Compile Include="ComboBoxControl.xaml.cs">
+      <DependentUpon>ComboBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlParser.cs" />
     <Compile Include="ControlParserFactory.cs" />
     <Compile Include="EndControl.xaml.cs">
@@ -73,6 +77,10 @@
     <Compile Include="MenuEntryControl.xaml.cs">
       <DependentUpon>MenuEntryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RadioButtonControl.cs" />
+    <Compile Include="RadioControl.xaml.cs">
+      <DependentUpon>RadioControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReadyControl.xaml.cs">
       <DependentUpon>ReadyControl.xaml</DependentUpon>
     </Compile>
@@ -89,6 +97,10 @@
     <Compile Include="MenuAndControlType.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ResultLogger.cs" />
+    <Compile Include="Slider.xaml.cs">
+      <DependentUpon>Slider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SliderControl.cs" />
     <Compile Include="SubMenuPanel.xaml.cs">
       <DependentUpon>SubMenuPanel.xaml</DependentUpon>
     </Compile>
@@ -98,6 +110,14 @@
     <Compile Include="TabbedSubMenuControl.xaml.cs">
       <DependentUpon>TabbedSubMenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextboxControl.cs" />
+    <Compile Include="Textbox.xaml.cs">
+      <DependentUpon>Textbox.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ComboBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EndControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RadioControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReadyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Slider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SubMenuPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TabbedSubMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Textbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
