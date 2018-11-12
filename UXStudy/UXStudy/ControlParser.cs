@@ -106,4 +106,142 @@ namespace UXStudy
             return new SingleSwitchControl(id, title, instructions, correct, init);
         }
     }
+
+    //creates a single switch view.
+    //format: Combo|title|grouping|must_answer|correct,init,options <- how line looks in txt file
+    //options: entry.entry.entry
+    public class ComboBoxParser : ControlParser
+    {
+        private string correct;
+        private string init;
+        private List<string> options;
+
+        public ComboBoxParser(int id, string line)
+            :base(id, line)
+        {
+            processExtra(line);
+        }
+
+        private void processExtra(string line)
+        {
+            string extra = line.Split('|')[EXTRA];
+            string[] parts = extra.Split(',');
+
+            if (parts.Length != 3)
+            {
+                throw new ArgumentException(id + ": extras must be formatted as correct,init,options");
+            }
+            else
+            {
+                correct = parts[0];
+                init = parts[1];
+                options = parts[2].Split('.').ToList();
+            }
+        }
+
+        public override IGameControl createControl()
+        {
+            return new ComboBoxControl(id, title, instructions, correct, init, options);
+        }
+    }
+
+    public class RadioParser : ControlParser
+    {
+        private string correct;
+        private string init;
+        private List<string> options;
+
+        public RadioParser(int id, string line)
+            :base(id, line)
+        {
+            processExtra(line);
+        }
+
+        private void processExtra(string line)
+        {
+            string extra = line.Split('|')[EXTRA];
+            string[] parts = extra.Split(',');
+
+            if (parts.Length != 3)
+            {
+                throw new ArgumentException(id + ": extras must be formatted as correct,init,options");
+            }
+            else
+            {
+                correct = parts[0];
+                init = parts[1];
+                options = parts[2].Split('.').ToList();
+            }
+        }
+
+        public override IGameControl createControl()
+        {
+            return new RadioButtonControl(id, title, instructions, correct, init, options);
+        }
+    }
+
+    //creates a single textbox view.
+    //format: Textbox|title|grouping|must_answer|correct <- how line looks in txt file
+    //options: entry.entry.entry
+    public class TextboxParser : ControlParser
+    {
+        private string correct;
+        
+        public TextboxParser(int id, string line)
+            :base(id, line)
+        {
+            processExtra(line);
+        }
+
+        private void processExtra(string line)
+        {
+            string extra = line.Split('|')[EXTRA];
+            correct = extra;
+        }
+
+        public override IGameControl createControl()
+        {
+            return new TextboxControl(id, title, instructions, correct);
+        }
+    }
+
+    //creates a single textbox view.
+    //format: Slider|title|grouping|must_answer|correct,init,min,max <- how line looks in txt file
+    public class SliderParser : ControlParser
+    {
+        private int correct;
+        private int init;
+        private int min;
+        private int max;
+
+        public SliderParser(int id, string line)
+            :base(id, line)
+        {
+            processExtra(line);
+        }
+
+        private void processExtra(string line)
+        {
+            string extra = line.Split('|')[EXTRA];
+            string[] parts = extra.Split(',');
+
+            if (parts.Length != 4 || !int.TryParse(parts[0], out int cor) || !int.TryParse(parts[1], out int ini)
+                || !int.TryParse(parts[2], out int mi) || !int.TryParse(parts[3], out int ma))
+            {
+                throw new ArgumentException(id + ": extras must be formatted as correct,init,min,max where all are integers");
+            }
+            else
+            {
+                correct = cor;
+                init = ini;
+                min = mi;
+                max = ma;
+            }
+        }
+
+        public override IGameControl createControl()
+        {
+            return new SliderControl(id, title, instructions, correct, init, min, max);
+        }
+    }
 }

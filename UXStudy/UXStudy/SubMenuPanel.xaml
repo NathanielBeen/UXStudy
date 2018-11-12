@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Vertical">
-        <Label Content="{Binding Title}" HorizontalAlignment="Left"/>
+        <Label Content="{Binding Title}" HorizontalAlignment="Left" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Controls}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

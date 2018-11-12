@@ -15,6 +15,14 @@ namespace UXStudy
             {
                 case ControlType.SWITCH:
                     return new SwitchParser(id, line);
+                case ControlType.COMBOBOX:
+                    return new ComboBoxParser(id, line);
+                case ControlType.RADIO:
+                    return new RadioParser(id, line);
+                case ControlType.TEXTBOX:
+                    return new TextboxParser(id, line);
+                case ControlType.SLIDER:
+                    return new SliderParser(id, line);
                 default:
                     return null;
             }

@@ -31,11 +31,13 @@ namespace UXStudy
     {
         public IGameControl Control { get; }
         public DateTime Time { get; }
+        public string Answer { get; }
 
-        public ClickEvent(IGameControl control, DateTime time)
+        public ClickEvent(IGameControl control, string answer, DateTime time)
         {
             Control = control;
             Time = time;
+            Answer = answer;
         }
     }
 }

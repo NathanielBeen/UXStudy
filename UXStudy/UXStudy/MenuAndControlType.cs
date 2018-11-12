@@ -62,7 +62,11 @@ namespace UXStudy
     public enum ControlType
     {
         NONE = 0,
-        SWITCH = 1
+        SWITCH = 1,
+        TEXTBOX = 2,
+        COMBOBOX = 3,
+        RADIO = 4,
+        SLIDER = 5
     }
 
     public static class ControlTypeExtensions
@@ -74,6 +78,14 @@ namespace UXStudy
             {
                 case "Switch":
                     return ControlType.SWITCH;
+                case "Combo":
+                    return ControlType.COMBOBOX;
+                case "Textbox":
+                    return ControlType.TEXTBOX;
+                case "Slider":
+                    return ControlType.SLIDER;
+                case "Radio":
+                    return ControlType.RADIO;
                 default:
                     return ControlType.NONE;
             }
