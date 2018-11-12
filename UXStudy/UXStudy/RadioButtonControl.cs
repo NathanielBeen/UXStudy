@@ -52,7 +52,7 @@ namespace UXStudy
         private void handleSelectedChanged(object sender, RadioEntry entry)
         {
             Options.ForEach(o => o.Selected = o.Equals(entry));
-            ControlChanged?.Invoke(this, new ClickEvent(this, DateTime.Now));
+            ControlChanged?.Invoke(this, new ClickEvent(this, entry.Value, DateTime.Now));
         }
     }
 

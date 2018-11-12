@@ -42,10 +42,13 @@ namespace UXStudy
 
         private void enteredChanged(string value)
         {
-            bool set = SetProperty(ref entered, value);
-            if (set)
+            bool prev_correct = Correct;
+            SetProperty(ref entered, value);
+            bool after_correct = Correct;
+
+            if (prev_correct != after_correct)
             {
-                ControlChanged?.Invoke(this, new ClickEvent(this, DateTime.Now));
+                ControlChanged?.Invoke(this, new ClickEvent(this, value, DateTime.Now));
             }
         }
     }

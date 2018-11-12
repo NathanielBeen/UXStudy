@@ -50,10 +50,13 @@ namespace UXStudy
 
         private void currentChanged(int value)
         {
-            bool set = SetProperty(ref current, value);
-            if (set)
+            bool prev_correct = Correct;
+            SetProperty(ref current, value);
+            bool after_correct = Correct;
+
+            if (prev_correct != after_correct)
             {
-                ControlChanged?.Invoke(this, new ClickEvent(this, DateTime.Now));
+                ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now));
             }
         }
     }

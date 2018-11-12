@@ -181,7 +181,7 @@ namespace UXStudy
     }
 
     //creates a single textbox view.
-    //format: Combo|title|grouping|must_answer|correct <- how line looks in txt file
+    //format: Textbox|title|grouping|must_answer|correct <- how line looks in txt file
     //options: entry.entry.entry
     public class TextboxParser : ControlParser
     {
@@ -206,7 +206,7 @@ namespace UXStudy
     }
 
     //creates a single textbox view.
-    //format: Combo|title|grouping|must_answer|correct,init,min,max <- how line looks in txt file
+    //format: Slider|title|grouping|must_answer|correct,init,min,max <- how line looks in txt file
     public class SliderParser : ControlParser
     {
         private int correct;

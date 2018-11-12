@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Horizontal">
-        <Label Content="{Binding Title}" Width="65"/>
+        <Label Content="{Binding Title}" Margin="0,0,5,0"/>
         <Slider Name="slider" Minimum="{Binding Min}" Maximum="{Binding Max}" Value="{Binding Current}" TickFrequency="10" IsSnapToTickEnabled="True"
                     TickPlacement="BottomRight" Foreground="Gray" Width="200"/>
         <Label Content="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>

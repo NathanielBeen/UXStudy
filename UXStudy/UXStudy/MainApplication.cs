@@ -17,6 +17,7 @@ namespace UXStudy
         INITIAL,
         READY,
         TEST,
+        SURVEY,
         COMPLETE
     }
 
@@ -24,9 +25,8 @@ namespace UXStudy
     {
         //location of files to write to/read from
         public const string INPUT_FILE = "../../Files/input.txt";
-        public const string INFO_OUTPUT = "../../Files/info_out.txt";
+        public const string SURVEY_OUTPUT = "../../Files/survey_out.txt";
         public const string ANSWER_OUTPUT = "../../Files/answer_out.txt";
-        public const string POSITION_OUTPUT = "../../Files/position_out.txt";
 
         private ResultLogger logger;
         private CompletionTracker completion;
@@ -63,6 +63,7 @@ namespace UXStudy
         public Menu CurrentMenu { get; private set; }
         public MenuType CurrentType { get; private set; }
         public Instructions Instructions { get; private set; }
+        public Survey CurrentSurvey { get; private set; }
 
         //Buttons on the main screen will bind to these commands
         public ICommand SubmitInfoCommand { get; private set; }
@@ -71,7 +72,7 @@ namespace UXStudy
 
         public MainApplication()
         {
-            logger = new ResultLogger(INFO_OUTPUT, ANSWER_OUTPUT, POSITION_OUTPUT);
+            logger = new ResultLogger(ANSWER_OUTPUT, SURVEY_OUTPUT);
             completion = new CompletionTracker();
             factory = new MenuFactory(new MenuParser(logger, INPUT_FILE), logger);
 
@@ -81,6 +82,7 @@ namespace UXStudy
             CurrentMenu = null;
             CurrentType = MenuType.NONE;
             Instructions = new Instructions();
+            CurrentSurvey = null;
 
             initCommands();
         }
@@ -129,6 +131,16 @@ namespace UXStudy
             completion.typeCompleted(CurrentType);
             Instructions.closeInstructions();
 
+            CurrentSurvey.SurveySubmitted -= handleSurveyComplete;
+            CurrentSurvey = new Survey(logger, CurrentType);
+            CurrentSurvey.SurveySubmitted += handleSurveyComplete;
+
+            CurrentState = StudyState.SURVEY;
+        }
+
+        private void handleSurveyComplete(object sender, EventArgs args)
+        {
+            //check if all stages have been complete
             if (completion.testComplete())
             {
                 CurrentState = StudyState.COMPLETE;

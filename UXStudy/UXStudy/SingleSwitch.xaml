@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Horizontal">
-        <Label Content="{Binding Title}" VerticalAlignment="Center" Width="65"/>
-        <CheckBox IsChecked="{Binding Switched}" VerticalAlignment="Center"/>
+        <CheckBox IsChecked="{Binding Switched}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5,0,0,0"/>
     </StackPanel>
 </UserControl>

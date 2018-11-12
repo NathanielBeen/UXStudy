@@ -104,6 +104,13 @@
     <Compile Include="SubMenuPanel.xaml.cs">
       <DependentUpon>SubMenuPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Survey.cs" />
+    <Compile Include="SurveyControl.xaml.cs">
+      <DependentUpon>SurveyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyRadioControl.xaml.cs">
+      <DependentUpon>SurveyRadioControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TabbedMenuControl.xaml.cs">
       <DependentUpon>TabbedMenuControl.xaml</DependentUpon>
     </Compile>
@@ -173,6 +180,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubMenuPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SurveyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SurveyRadioControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

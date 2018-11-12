@@ -55,7 +55,7 @@ namespace UXStudy
         private void handleControlAnswered(object sender, ClickEvent click)
         {
             bool correct = (click.Control.Correct && WantedControls.Contains(click.Control));
-            logger.logResult(click.Control.ControlID, correct, click.Time);
+            logger.logResult(click.Control, click.Answer, click.Time);
 
             //if all controls have been correctly answered, log the finish and update the main game
             //so it can generate the next menu (if the answered control is not in the desired category and the 

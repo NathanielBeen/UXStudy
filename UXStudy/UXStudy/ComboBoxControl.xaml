@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Horizontal">
-        <Label Content="{Binding Title}" Width="65"/>
+        <Label Content="{Binding Title}" Margin="0,0,5,0"/>
         <ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding Selected}"/>
     </StackPanel>
 </UserControl>

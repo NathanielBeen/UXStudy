@@ -49,7 +49,7 @@ namespace UXStudy
             bool set = SetProperty(ref switched, value);
             if (set)
             {
-                ControlChanged?.Invoke(this, new ClickEvent(this, DateTime.Now));
+                ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now));
             }
         }
     }
