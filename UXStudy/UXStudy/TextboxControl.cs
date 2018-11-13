@@ -20,7 +20,17 @@ namespace UXStudy
         public string Entered
         {
             get { return entered; }
-            set { enteredChanged(value); }
+            set
+            {
+                bool prev_correct = Correct;
+                SetProperty(ref entered, value);
+                bool after_correct = Correct;
+
+                if (prev_correct != after_correct)
+                {
+                    ControlChanged?.Invoke(this, new ClickEvent(this, value, DateTime.Now));
+                }
+            }
         }
 
         public TextboxControl(int id, string title, string instructions, string correct)
@@ -38,18 +48,6 @@ namespace UXStudy
         public void reset()
         {
             Entered = String.Empty;
-        }
-
-        private void enteredChanged(string value)
-        {
-            bool prev_correct = Correct;
-            SetProperty(ref entered, value);
-            bool after_correct = Correct;
-
-            if (prev_correct != after_correct)
-            {
-                ControlChanged?.Invoke(this, new ClickEvent(this, value, DateTime.Now));
-            }
         }
     }
 }

@@ -111,7 +111,11 @@ namespace UXStudy
         public bool Selected
         {
             get { return selected; }
-            set { handleSelected(value); }
+            set
+            {
+                bool set = SetProperty(ref selected, value);
+                if (set && value) { EntrySelected?.Invoke(this, this); }
+            }
         }
 
         public SurveyEntry(string value)
@@ -121,14 +125,5 @@ namespace UXStudy
         }
 
         public event EventHandler<SurveyEntry> EntrySelected;
-
-        private void handleSelected(bool value)
-        {
-            bool set = SetProperty(ref selected, value);
-            if (set && value)
-            {
-                EntrySelected?.Invoke(this, this);
-            }
-        }
     }
 }

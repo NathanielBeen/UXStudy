@@ -64,7 +64,11 @@ namespace UXStudy
         public bool Selected
         {
             get { return selected; }
-            set { selectedChanged(value); }
+            set
+            {
+                bool set = SetProperty(ref selected, value);
+                if (set && value) { EntrySelected?.Invoke(this, this); }
+            }
         }
 
         public RadioEntry(string value, bool selected)
@@ -74,14 +78,5 @@ namespace UXStudy
         }
 
         public event EventHandler<RadioEntry> EntrySelected;
-
-        private void selectedChanged(bool value)
-        {
-            bool set = SetProperty(ref selected, value);
-            if (set && value)
-            {
-                EntrySelected?.Invoke(this, this);
-            }
-        }
     }
 }

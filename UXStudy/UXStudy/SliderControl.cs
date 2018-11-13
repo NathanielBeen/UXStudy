@@ -24,7 +24,17 @@ namespace UXStudy
         public int Current
         {
             get { return current; }
-            set { currentChanged(value); }
+            set
+            {
+                bool prev_correct = Correct;
+                SetProperty(ref current, value);
+                bool after_correct = Correct;
+
+                if (prev_correct != after_correct)
+                {
+                    ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now));
+                }
+            }
         }
 
         public SliderControl(int id, string title, string instructions, int correct, int init, int min, int max)
@@ -46,18 +56,6 @@ namespace UXStudy
         public void reset()
         {
             Current = init;
-        }
-
-        private void currentChanged(int value)
-        {
-            bool prev_correct = Correct;
-            SetProperty(ref current, value);
-            bool after_correct = Correct;
-
-            if (prev_correct != after_correct)
-            {
-                ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now));
-            }
         }
     }
 }

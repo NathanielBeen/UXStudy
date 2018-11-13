@@ -7,7 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Style x:Name="alphaStyle" TargetType="ContentControl">
+        <DataTemplate x:Key="notAlpha">
+            <Label Content=""/>
+        </DataTemplate>
+        <DataTemplate x:Key="alpha">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding KnewAlpha}" VerticalAlignment="Center" Margin="5"/>
+                <Label Content="I knew that this menu was in alphabetical order"/>
+            </StackPanel>
+        </DataTemplate>
+        <Style x:Key="alphaStyle" TargetType="ContentControl">
             <Setter Property="ContentTemplate" Value="{StaticResource notAlpha}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Alpha}" Value="True">
@@ -15,26 +24,19 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <DataTemplate x:Key="alpha">
-            <Label Content=""/>
-        </DataTemplate>
-        <DataTemplate x:Key="notAlpha">
-            <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding KnewAlpha}" VerticalAlignment="Center" Margin="5"/>
-                <Label Content="I knew that this menu was in alphabetical order"/>
-            </StackPanel>   
-        </DataTemplate>
     </UserControl.Resources>
-    <StackPanel Orientation="Vertical">
-        <Label Content="Please answer the following questions based on the previous menu" Margin="0,0,0,20"/>
-        <ContentControl Style="{StaticResource alphaStyle}" Content="{Binding}"/>
-        <ItemsControl ItemsSource="{Binding Questions}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:SurveyRadioControl/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Button Content="Submit" HorizontalAlignment="Center" Command="{Binding SubmitCommand}" Padding="2"/>
-    </StackPanel>
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Please answer the following questions based on the previous menu" Margin="0,0,0,20"/>
+            <ContentControl Style="{StaticResource alphaStyle}" Content="{Binding}"/>
+            <ItemsControl ItemsSource="{Binding Questions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:SurveyRadioControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Button Content="Submit" HorizontalAlignment="Center" Command="{Binding SubmitCommand}" Padding="2" Margin="15"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

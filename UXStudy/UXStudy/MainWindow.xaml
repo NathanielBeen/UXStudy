@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UXStudy"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
+        Title="MainWindow" Height="350" Width="575" ResizeMode="NoResize">
     <Window.Resources>
         <DataTemplate x:Key="initial">
             <local:InitialControl/>
@@ -15,6 +15,9 @@
         </DataTemplate>
         <DataTemplate x:Key="menu">
             <local:MenuControl DataContext="{Binding CurrentMenu}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="survey">
+            <local:SurveyControl DataContext="{Binding CurrentSurvey}"/>
         </DataTemplate>
         <DataTemplate x:Key="end">
             <local:EndControl/>
@@ -27,6 +30,9 @@
                 </DataTrigger>
                 <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.TEST}">
                     <Setter Property="ContentTemplate" Value="{StaticResource menu}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.SURVEY}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource survey}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.COMPLETE}">
                     <Setter Property="ContentTemplate" Value="{StaticResource end}"/>

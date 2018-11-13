@@ -131,7 +131,7 @@ namespace UXStudy
             completion.typeCompleted(CurrentType);
             Instructions.closeInstructions();
 
-            CurrentSurvey.SurveySubmitted -= handleSurveyComplete;
+            if (CurrentSurvey != null) { CurrentSurvey.SurveySubmitted -= handleSurveyComplete; }
             CurrentSurvey = new Survey(logger, CurrentType);
             CurrentSurvey.SurveySubmitted += handleSurveyComplete;
 

@@ -12,7 +12,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton GroupName="group" IsChecked="{Binding Selected, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <RadioButton IsChecked="{Binding Selected, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Label Content="{Binding Value}"/>
                     </StackPanel>
                 </DataTemplate>

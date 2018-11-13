@@ -23,7 +23,11 @@ namespace UXStudy
         public string Selected
         {
             get { return selected; }
-            set { selectedChanged(value); }
+            set
+            {
+                bool set = SetProperty(ref selected, value);
+                if (set) { ControlChanged?.Invoke(this, new ClickEvent(this, value, DateTime.Now)); }
+            }
         }
 
         public ComboBoxControl(int id, string title, string instructions, string correct, string init, List<string> options)
@@ -42,15 +46,6 @@ namespace UXStudy
         public void reset()
         {
             Selected = init;
-        }
-
-        private void selectedChanged(string value)
-        {
-            bool set = SetProperty(ref selected, value);
-            if (set)
-            {
-                ControlChanged?.Invoke(this, new ClickEvent(this, value, DateTime.Now));
-            }
         }
     }
 }

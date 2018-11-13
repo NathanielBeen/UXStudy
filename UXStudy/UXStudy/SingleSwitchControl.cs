@@ -22,7 +22,11 @@ namespace UXStudy
         public bool Switched
         {
             get { return switched; }
-            set { switchChanged(value); }
+            set
+            {
+                bool set = SetProperty(ref switched, value);
+                if (set) { ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now)); }
+            }
         }
 
         public SingleSwitchControl(int id, string title, string instructions, bool correct_ans, bool init)
@@ -43,14 +47,5 @@ namespace UXStudy
 
         public event EventHandler<ClickEvent> ControlChangeStarted;
         public event EventHandler<ClickEvent> ControlChanged;
-
-        private void switchChanged(bool value)
-        {
-            bool set = SetProperty(ref switched, value);
-            if (set)
-            {
-                ControlChanged?.Invoke(this, new ClickEvent(this, value.ToString(), DateTime.Now));
-            }
-        }
     }
 }

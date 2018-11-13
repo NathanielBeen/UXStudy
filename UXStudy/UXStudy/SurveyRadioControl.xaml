@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel Orientation="Vertical">
-        <Label Content="{Binding Question}"/>
+        <Label Content="{Binding Question}" FontWeight="Bold" Margin="0,30,0,0"/>
         <ItemsControl ItemsSource="{Binding Options}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -18,7 +18,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <Label Content="{Binding Value}"/>
-                        <RadioButton GroupName="group" IsChecked="{Binding Selected, UpdateSourceTrigger=PropertyChanged}"/>
+                        <RadioButton IsChecked="{Binding Selected, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
