@@ -4,3 +4,33 @@ Started | Random | 09:14:40
 Answered | Notify me of new articles from followed blogs (SWITCH)  | False (True) |09:15:10
 Ended | Random | 09:15:10
 
+User name: test
+
+Started | Random | 21:23:12
+Answered | Job Field (COMBOBOX)  | IT (True) |21:23:23
+Answered | See Multilingual Articles (SWITCH)  | True (True) |21:23:31
+Answered | Number of days your articles can be viewed (SLIDER)  | 80 (True) |21:23:35
+Answered | Make blog primary blog (SWITCH)  | True (True) |21:23:48
+Ended | Random | 21:23:48
+
+Started | Grouped | 21:23:57
+Answered | Notify me of suggested articles (SWITCH)  | False (True) |21:24:09
+Answered | Screen Name (TEXTBOX)  | blogger1 (True) |21:24:14
+Answered | Keep subscriptions private (SWITCH)  | True (True) |21:24:19
+Answered | Who can view your profile (COMBOBOX)  | only friends can view (True) |21:24:23
+Ended | Grouped | 21:24:23
+
+Started | Tabbed | 21:24:30
+Answered | Blog Name (TEXTBOX)  | My Blog (True) |21:24:39
+Answered | Notify me once the like threshold is met (SWITCH)  | False (True) |21:24:50
+Answered | Language (COMBOBOX)  | English (UK) (True) |21:24:55
+Answered | Keep liked articles private (SWITCH)  | True (True) |21:24:58
+Ended | Tabbed | 21:24:58
+
+Started | Alphabetical | 21:25:06
+Answered | First Name (TEXTBOX)  | John (True) |21:25:15
+Answered | Blog Type (RADIO)  | Personal (True) |21:25:47
+Answered | Translation Language (COMBOBOX)  | German (True) |21:25:56
+Answered | Notify me of comments on my articles (SWITCH)  | False (True) |21:26:04
+Ended | Alphabetical | 21:26:04
+
