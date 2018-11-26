@@ -15,6 +15,7 @@ namespace UXStudy
     public enum StudyState
     {
         INITIAL,
+        INSTRUCTIONS,
         READY,
         TEST,
         SURVEY,
@@ -62,6 +63,7 @@ namespace UXStudy
 
         public Menu CurrentMenu { get; private set; }
         public MenuType CurrentType { get; private set; }
+        public InstructionView InitInstructions { get; private set; }
         public Instructions Instructions { get; private set; }
         public Survey CurrentSurvey { get; private set; }
 
@@ -81,6 +83,8 @@ namespace UXStudy
             Error = String.Empty;
             CurrentMenu = null;
             CurrentType = MenuType.NONE;
+            InitInstructions = new InstructionView();
+            InitInstructions.ContinueSelected += handleInstructionsComplete;
             Instructions = new Instructions();
             CurrentSurvey = null;
 
@@ -105,9 +109,14 @@ namespace UXStudy
             else
             {
                 Error = String.Empty;
-                CurrentState = StudyState.READY;
+                CurrentState = StudyState.INSTRUCTIONS;
                 logger.logUserInfo(Name);
             }
+        }
+
+        private void handleConfirmInstructions()
+        {
+            CurrentState = StudyState.READY;
         }
 
         //called when the user presses the "start test" button
@@ -136,6 +145,11 @@ namespace UXStudy
             CurrentSurvey.SurveySubmitted += handleSurveyComplete;
 
             CurrentState = StudyState.SURVEY;
+        }
+
+        private void handleInstructionsComplete(object sender, EventArgs args)
+        {
+            handleConfirmInstructions();
         }
 
         private void handleSurveyComplete(object sender, EventArgs args)

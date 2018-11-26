@@ -1,20 +1,20 @@
-Combo|Notification types|Notification|none|None,Email and Dashboard,Email and Dashboard.Email only.Dashboard only.None|Change notification types so you recieve no notifications
-Textbox|Notification Email|Notification|none|email@email.com|Set Notification Email to "email@email.com"
-Switch|Notify me of suggested articles|Notification|3|False,True|Deselect recieving notifications from suggested articles
+Combo|Notification types|Notification|1|None,Email and Dashboard,Email and Dashboard.Email only.Dashboard only.None|
+Textbox|Notification Email|Notification|none|email@email.com|
+Switch|Notify me of suggested articles|Notification|3|False,True|
 Switch|Notify me of new articles from followed blogs|Notification|none|False,True|Deselect recieving notifications from new articles on followed blogs
 Switch|Notify me of comments on my articles|Notification|2|False,True|Deselect recieving notifications of new comments on your articles
 Switch|Notify me of replies to my comments|Notification|none|False,True|Deselect recieving notifications of replies to your comments
-Switch|Notify me of reblogs of my articles|Notification|none|False,True|Deselect recieving notifications of reblogs of your articles
-Switch|Notify me once the like threshold is met|Notification|1|False,True|Deselect recieving notification after a certain threshold of likes has been met
-Slider|Like Threshold|Notification|none|20,50,10,100|Set the like threshold for notifications to 20
-Combo|Language|Language|1|English (UK),Arabic,Arabic.English (US).English (UK).French.German.Hindi.Japanese.Mandarin.Russian|Set Langauge to UK English
+Switch|Notify me of reblogs of my articles|Notification|1|False,True|Deselect recieving notifications of reblogs of your articles
+Switch|Notify me once the like threshold is met|Notification|5|False,True|Deselect recieving notification after a certain threshold of likes has been met
+Slider|Like Threshold|Notification|1|20,50,10,100|Set the like threshold for notifications to 20
+Combo|Language|Language|5|English (UK),Arabic,Arabic.English (US).English (UK).French.German.Hindi.Japanese.Mandarin.Russian|Set Langauge to UK English
 Radio|Translate Articles|Language|none|Translate articles from followed blogs,Never translate articles,Never translate articles.Translate articles from followed blogs.Translate all articles|Change Translate Articles so it only translates articles from followed blogs
 Combo|Translation Language|Language|2|German,Arabic,Arabic.English (US).English (UK).French.German.Hindi.Japanese.Mandarin.Russian|Set Translation Language to German
 Switch|See Multilingual Articles|Language|4|True,False|Select to see multilingual articles
 Combo|Who can view your profile|Privacy|3|only friends can view,anyone can view,anyone can view.only followers can view.only friends can view.no one can view|Set it so that only friends can view your profile
 Combo|Who can view your blog|Privacy|none|only followers can view,anyone can view,anyone can view.only followers can view.only firends can view.no one can view|Set it so that only followers can view your blog
 Slider|Number of days your articles can be viewed|Privacy|4|80,100,10,100|Set the number of days your articles can be viewed to 80
-Switch|Keep liked articles private|Privacy|1|True,False|make your liked articles private
+Switch|Keep liked articles private|Privacy|5|True,False|make your liked articles private
 Switch|Keep subscriptions private|Privacy|none|True,False|make your subscriptions private
 Radio|Outside Search Engines|Privacy|none|can only link to your blogroll,can link to any article,can link to any article.can only link to your blogroll.can only link to your main page.cannot link to any of your pages|only allow search engines to link to your blogroll
 Radio|Who can tag you in posts|Privacy|3|No one,Friends,Anyone.Followers.Friends.No one|do not allow anyone to tag you in posts
@@ -24,9 +24,9 @@ Textbox|Screen Name|Account|3|blogger1|Set the screen name to "blogger1"
 Combo|Age Range|Account|none|41-45,18-20,18-20.21-25.26-30.31-35.36-40.41-45.46-50.51-55.56-60.61+|Set age range to 41-45
 Combo|Job Field|Account|4|IT,Accounting,Accounting.Legal.IT.Retail.Law Enforcement.Human Services.Education.Manufacturing|Set Job field to IT
 Textbox|Phone|Account|none|1234567890|Set Phone number to 1234567890
-Textbox|Email|Account|none|email@email.com|Set email to email@email.com
+Textbox|Email|Account|1|email@email.com|Set email to email@email.com
 Combo|Account Type|Account|none|Standard Plus,Standard,Gold Member.Silver Member.Standard Plus.Standard|Set the account type to Standard Plus
-Textbox|Blog Name|Account|1|My Blog|Set the blog name to "My Blog"
+Textbox|Blog Name|Account|5|My Blog|Set the blog name to "My Blog"
 Radio|Blog Type|Account|2|Personal,Professional,Professional.Academic.Personal|Set the blog type as Personal
 Switch|Make blog primary blog|Account|4|True,False|make the blog the primary account blog
 Switch|Allow Ads on blog|Account|none|False,True|diable ads on the blog

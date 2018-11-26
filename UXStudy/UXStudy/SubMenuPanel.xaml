@@ -4,10 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UXStudy"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="noTitle">
+            <Label Content=""/>
+        </DataTemplate>
+        <DataTemplate x:Key="Title">
+            <Label Content="{Binding Title}" FontWeight="Bold" FontSize="14" Background="LightGray"/>
+        </DataTemplate>
+        <Style TargetType="ContentControl" x:Key="labelStyle">
+            <Setter Property="ContentTemplate" Value="{StaticResource Title}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Title}" Value="{x:Static system:String.Empty}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource noTitle}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <StackPanel Orientation="Vertical">
-        <Label Content="{Binding Title}" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <ContentControl Style="{StaticResource labelStyle}" Content="{Binding}"/>
         <ListBox ItemsSource="{Binding Controls}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

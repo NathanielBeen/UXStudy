@@ -21,6 +21,13 @@ namespace UXStudy
             set { SetProperty(ref knew_alpha, value); }
         }
 
+        private string comment;
+        public string Comment
+        {
+            get { return comment; }
+            set { SetProperty(ref comment, value); }
+        }
+
         public RelayCommand SubmitCommand { get; private set; }
 
         public event EventHandler SurveySubmitted;
@@ -31,6 +38,7 @@ namespace UXStudy
             Type = type;
             Alpha = (type == MenuType.ALPHA);
             KnewAlpha = false;
+            Comment = String.Empty;
 
             initSurveys();
             initCommands();

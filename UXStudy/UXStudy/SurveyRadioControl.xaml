@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UXStudy"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="575">
     <StackPanel Orientation="Vertical">
         <Label Content="{Binding Question}" FontWeight="Bold" Margin="0,30,0,0"/>
         <ItemsControl ItemsSource="{Binding Options}">

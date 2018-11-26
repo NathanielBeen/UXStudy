@@ -79,6 +79,7 @@ namespace UXStudy
             {
                 survey_string.AppendLine(answer.Question + ": " + answer.getSelected());
             }
+            if (survey.Comment != String.Empty) { survey_string.AppendLine("Comments: " + survey.Comment); }
             survey_string.AppendLine("");
         }
     }

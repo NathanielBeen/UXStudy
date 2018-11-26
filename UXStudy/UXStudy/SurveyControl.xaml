@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UXStudy"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="575">
     <UserControl.Resources>
         <DataTemplate x:Key="notAlpha">
             <Label Content=""/>
@@ -36,6 +36,8 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Label Content="Additional Comments (Optional)" FontWeight="Bold"/>
+            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="50" Width="300" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>
             <Button Content="Submit" HorizontalAlignment="Center" Command="{Binding SubmitCommand}" Padding="2" Margin="15"/>
         </StackPanel>
     </ScrollViewer>

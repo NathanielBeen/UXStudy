@@ -66,7 +66,11 @@
     <Compile Include="InitialControl.xaml.cs">
       <DependentUpon>InitialControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InstructionControl.xaml.cs">
+      <DependentUpon>InstructionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Instructions.cs" />
+    <Compile Include="InstructionView.cs" />
     <Compile Include="InstructionWindow.xaml.cs">
       <DependentUpon>InstructionWindow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InitialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InstructionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

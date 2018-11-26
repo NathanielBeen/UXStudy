@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="UXStudy.InstructionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UXStudy"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="575">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Label Content="Instructions" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+            <TextBlock Text='For this test, you will be asked to use a variety of menus. This test will be divided into multiple phases. Each phase begins when you select the "Begin Phase" button and ends automatically when the given tasks are completed. After each phase, you will be asked to fill out a survey before beginning the next phase.' TextWrapping="Wrap" Padding="5"/>
+            <TextBlock Text="During each phase, you will be instructed to change specific settings to specific values. An instruction window will pop up at the start of each phase and detail which settings you are to change, as seen below" TextWrapping="Wrap" Padding="5"/>
+            <Label Background="{Binding InstructionImage}" Height="244" Width="281" BorderBrush="Gray" BorderThickness="1"/>
+            <TextBlock Text="Each item on the bulleted list asks you to change a single setting. It will always be formatted as 'Change [SETTING NAME] To [VALUE]' ('Check/Uncheck [CHECKBOX NAME]' for checkboxes). For example, given the first instruction above, you would find the below control in the menu and set it to 20." TextWrapping="Wrap" Padding="5"/>
+            <Label Background="{Binding MenuImage}" Height="49" Width="500"/>
+            <TextBlock Text="Be sure to ONLY change settings that are in the list on the instruction pop-up. Leave the rest as they are. If you have any questions feel free to ask the person who is administering the test before continuing" TextWrapping="Wrap" Padding="5"/>
+            <Button Content="Continue" Command="{Binding ContinueCommand}" HorizontalAlignment="Center" Margin="5" Padding="5"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

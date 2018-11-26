@@ -10,6 +10,9 @@
         <DataTemplate x:Key="initial">
             <local:InitialControl/>
         </DataTemplate>
+        <DataTemplate x:Key="instructions">
+            <local:InstructionControl DataContext="{Binding InitInstructions}"/>
+        </DataTemplate>
         <DataTemplate x:Key="ready">
             <local:ReadyControl/>
         </DataTemplate>
@@ -25,6 +28,9 @@
         <Style x:Key="mainStyle" TargetType="ContentControl">
             <Setter Property="ContentTemplate" Value="{StaticResource initial}"/>
             <Style.Triggers>
+                <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.INSTRUCTIONS}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource instructions}"/>
+                </DataTrigger>
                 <DataTrigger Binding="{Binding CurrentState}" Value="{x:Static local:StudyState.READY}">
                     <Setter Property="ContentTemplate" Value="{StaticResource ready}"/>
                 </DataTrigger>

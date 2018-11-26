@@ -42,7 +42,6 @@ namespace UXStudy
             else
             {
                 title = parts[TITLE];
-                instructions = parts[INSTRUCTIONS];
                 Grouping = parts[GROUPING];
                 MustAnswer = generateMustAnswer(parts[MUST_ANSWER]);
             }
@@ -98,6 +97,7 @@ namespace UXStudy
             {
                 correct = first;
                 init = second;
+                instructions = (correct) ? "Check '" + title + "'" : "Uncheck '" + title + "'";
             }
         }
 
@@ -136,6 +136,7 @@ namespace UXStudy
                 correct = parts[0];
                 init = parts[1];
                 options = parts[2].Split('.').ToList();
+                instructions = "Change '" + title + "' To '" + correct + "'";
             }
         }
 
@@ -171,6 +172,7 @@ namespace UXStudy
                 correct = parts[0];
                 init = parts[1];
                 options = parts[2].Split('.').ToList();
+                instructions = "Change '" + title + "' To '" + correct + "'";
             }
         }
 
@@ -197,6 +199,7 @@ namespace UXStudy
         {
             string extra = line.Split('|')[EXTRA];
             correct = extra;
+            instructions = "Change '" + title + "' To '" + correct + "'";
         }
 
         public override IGameControl createControl()
@@ -236,6 +239,7 @@ namespace UXStudy
                 init = ini;
                 min = mi;
                 max = ma;
+                instructions = "Change '" + title + "' To " + correct;
             }
         }
 
